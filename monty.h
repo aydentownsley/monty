@@ -1,6 +1,19 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+#define Stack (0)
+#define Queue (1)
+
+extern size_t line_num;
+extern stack_t **head;
+extern size_t ex_stat;
+extern int stack_queue;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
