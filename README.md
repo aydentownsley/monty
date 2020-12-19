@@ -1,3 +1,3 @@
-## MONTY INTERPRETER
+# MONTY INTERPRETER
 
-# Benjamen Dosch & Ayden Townsley
+## Benjamen Dosch & Ayden Townsley
