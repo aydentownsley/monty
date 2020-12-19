@@ -1,3 +1,6 @@
 # MONTY INTERPRETER
 
-## Benjamen Dosch & Ayden Townsley
+
+# Authors
+Ayden Townsley
+Benjamen Dosch
