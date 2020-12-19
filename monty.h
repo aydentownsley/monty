@@ -42,19 +42,19 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void push(stack_t **stack, unsigned int line_number):
-void pop(stack_t **stack, unsigned int line_number):
-void swap(stack_t **stack, unsigned int line_number):
-void rot_l(stack_t **stack, unsigned int line_number):
-void rot_r(stack_t **stack, unsigned int line_number):
-void p_int(stack_t **stack, unsigned int line_number):
-void p_all(stack_t **stack, unsigned int line_number):
-void p_char(stack_t **stack, unsigned int line_number):
-void p_str(stack_t **stack, unsigned int line_number):
-void add(stack_t **stack, unsigned int line_number):
-void sub(stack_t **stack, unsigned int line_number):
-void mul(stack_t **stack, unsigned int line_number):
-void div(stack_t **stack, unsigned int line_number):
-void mod(stack_t **stack, unsigned int line_number):
+void push(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_numbe);
+void rot_l(stack_t **stack, unsigned int line_number);
+void rot_r(stack_t **stack, unsigned int line_number);
+void p_int(stack_t **stack, unsigned int line_number);
+void p_all(stack_t **stack, unsigned int line_number);
+void p_char(stack_t **stack, unsigned int line_number);
+void p_str(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_number);
+void div(stack_t **stack, unsigned int line_number);
+void mod(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
