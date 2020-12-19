@@ -1,13 +1,9 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-
-#define Stack (0)
-#define Queue (1)
+#define STACK (0)
+#define QUEUE (1)
+#define BUFFSIZE (1024)
 
 extern size_t line_num;
 extern stack_t **head;
