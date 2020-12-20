@@ -78,7 +78,7 @@ void rot_l(stack_t **stack, unsigned int line_number __attribute__((unused)))
 
 	tmp = head->n;
 
-	pop(stack);
+	pop(stack, line_num);
 
 	add_end(stack, tmp);
 }

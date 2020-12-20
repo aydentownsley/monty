@@ -67,12 +67,12 @@ void mul(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	if (stack && top && top->next)
 	{
 		a = top->n;
-		to= = top->next;
+		top = top->next;
 		top->n *= a;
 		pop(stack, line_num);
 	}
 	else
-		hand_exit(MULL_EXIT, NUL);
+		hand_exit(MUL_EXIT, NULL);
 }
 
 /**
@@ -94,8 +94,8 @@ void divi(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		a = top->n;
 		top = top->next;
 		if (top->n == 0)
-			hand-exit(DIV_0_EXIT, NULL)
-		top->n /= a;
+			hand_exit(DIV_0_EXIT, NULL);
+		top->n = top->n / a;
 		pop(stack, line_num);
 	}
 	else
