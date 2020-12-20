@@ -65,26 +65,26 @@ int main(int argc, char *argv[])
 
 	open_and_read(buffer, argv[1]);
 
-	while (buffer[i])
+	while (buffer[file_pos])
 	{
-		if (buffer[i] == '#')
+		if (buffer[file_pos] == '#')
 		{
 			while (buffer != '\n')
-				i++;
-			i++;
+				file_pos++;
+			file_pos++;
 		}
-		else if (buffer[i] == '\n')
+		else if (buffer[file_pos] == '\n')
 		{
 			line_num++;
-			i++;
+			file_pos++;
 		}
-		else if (buffer[i] == ' ')
+		else if (buffer[file_pos] == ' ')
 		{
-			while (buffer[i] == ' ')
-				i++;
+			while (buffer[file_pos] == ' ')
+				file_pos++;
 		}
 		else
-			i += check_op(buffer[i]);
+			check_op();
 	}
 	return (0);
 }
