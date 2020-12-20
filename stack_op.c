@@ -38,29 +38,49 @@ void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 }
 
 /**
- * swap -
+ * swap - swaps the top to elements of stack/queue
  *
- * @
+ * @stack: head of stack/queue
  *
- * Return:
+ * Return: void, change stack
  */
 
 void swap(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *head = *stack, *headnext = *stack;
+	int tmp;
 
+	if (stack && head && head->next)
+	{
+		headnext = head->next;
+		tmp = head->n;
+		head->n = headnext->n;
+		headnext->n = tmp;
+	}
+	hand_exit(SWAP_EXIT, NULL);
 }
 
 /**
- * rot_l -
+ * rot_l - top element of stack/queue becomes last
  *
- * @
+ * @stack: head of stack/queue
  *
- * Return:
+ * Return: void, mods stack/queue
  */
 
 void rot_l(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *head = *stack;
+	int tmp;
 
+	if (stack == NULL || head == NULL)
+		return;
+
+	tmp = head->n;
+
+	pop(stack);
+
+	add_end(stack, tmp);
 }
 
 /**
@@ -73,5 +93,18 @@ void rot_l(stack_t **stack, unsigned int line_number __attribute__((unused)))
 
 void rot_r(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *tail = *stack;
+	int tmp;
 
+	if (stack == NULL || tail == NULL)
+		return;
+
+	while (tail->next)
+		tail = tail->next;
+
+	tmp = tail->n;
+
+	delete_end(stack);
+
+	add_begin(stack, tmp);
 }
