@@ -3,7 +3,22 @@
 
 #define STACK (0)
 #define QUEUE (1)
-#define BUFFSIZE (1024)
+#define MALLOC_EXIT (0)
+#define OP_EXIT (1)
+#define OPEN_EXIT (2)
+#define ARG_EXIT (3)
+#define PUSH_INT_EXIT (4)
+#define PINT_EXIT (5)
+#define POP_EXIT (6)
+#define SWAP_EXIT (7)
+#define ADD_EXIT (8)
+#define SUB_EXIT (9)
+#define MUL_EXIT (10)
+#define DIV_EXIT (11)
+#define DIV_0_EXIT (12)
+#define MOD_EXIT (13)
+#define IN_PCHAR_EXIT (14)
+#define PCHAR_EXIT (15)
 
 extern size_t line_num;
 extern stack_t **head;

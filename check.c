@@ -135,21 +135,21 @@ void hand_exit(int ex, char *str)
 		printf("L%u: can't sub, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	case 10:
-		printf("L%u: can't div, stack too short\n", line_num);
+		printf("L%u: can't mul, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	case 11:
-		printf("L%u: division by zero\n", line_num);
+		printf("L%u: can't div, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	case 12:
-       		printf("L%u: can't mod, stack too short\n");
+		printf("L%u: division by zero\n", line_num);
 		exit(EXIT_FAILURE);
 	case 13:
-		printf("L%u: can't pchar, value out of range\n", line_num);
+       		printf("L%u: can't mod, stack too short\n");
 		exit(EXIT_FAILURE);
 	case 14:
-		printf("L%u: can't pchar, stack empty\n", line_num);
+		printf("L%u: can't pchar, value out of range\n", line_num);
 		exit(EXIT_FAILURE);
 	case 15:
-		printf("\n", line_num);
+		printf("L%u: can't pchar, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
 }
