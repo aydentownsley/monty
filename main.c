@@ -34,31 +34,23 @@ void open_and_read(char *buffer, char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
-		printf("Error: Can't open file %s\n", file);
-		exit(EXIT_FAILURE);
-	}
+		hand_exit(OPEN_EXIT, NULL);
 	file_size = get_size(fd);
 	buffer = malloc(sizeof(char) * file_size);
 	if (buffer == NULL)
-	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		hand_exit(MALLOC_EXIT, NULL);
 	rd = read(fd, buffer, file_size);
 	if (rd == -1)
-	{
-		printf("Error: Can't open file %s\n", file);
-		exit(EXIT_FAILURE);
-	}
+		hand_exit(OPEN_EXIT, NULL);
 }
+
 /**
- * main -
+ * main - Inturprets a monty bytecode file
  *
- * @argc:
- * @argv:
+ * @argc: Number of arguments
+ * @argv: List of arguments
  *
- * Return:
+ * Return: 0 on success
  */
 
 int main(int argc, char *argv[])
@@ -69,10 +61,7 @@ int main(int argc, char *argv[])
 	line_num = 0;
 
 	if (argc != 2)
-	{
-		printf("USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		hand_exit(ARG_EXIT, NULL);
 
 	open_and_read(buffer, argv[1]);
 
@@ -95,6 +84,7 @@ int main(int argc, char *argv[])
 				i++;
 		}
 		else
-			
+			i += check_op(buffer[i]);
 	}
+	return (0);
 }
