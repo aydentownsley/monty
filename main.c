@@ -27,7 +27,7 @@ size_t get_size(int fd)
  * Return: void
  */
 
-void open_and_read(char *buffer, char *file)
+void open_and_read(char *file)
 {
 	size_t file_size;
 	int fd, rd;

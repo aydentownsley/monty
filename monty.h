@@ -60,11 +60,11 @@ typedef struct instruction_s
 } instruction_t;
 
 size_t get_size(int fd);
-void open_and_read(char *buffer, char *file);
+void open_and_read(char *file);
 int main(int argc, char *argv[]);
-int check_op(char *buffer);
-size_t null_comp(char *oc);
-check_int
+void check_op(void);
+void null_comp(char *oc);
+int check_int(void);
 void hand_exit(int ex, char *str);
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
