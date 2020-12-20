@@ -8,7 +8,7 @@
  * Return:
  */
 
-void p_char(stack_t **stack, unsigned int line_number)
+void p_char(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
@@ -21,7 +21,7 @@ void p_char(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void p_str(stack_t **stack, unsigned int line_number)
+void p_str(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }

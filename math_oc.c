@@ -8,7 +8,7 @@
  * Return:
  */
 
-void add(stack_t **stack, unsigned int line_number)
+void add(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
@@ -21,7 +21,7 @@ void add(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void sub(stack_t **stack, unsigned int line_number)
+void sub(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
@@ -34,7 +34,7 @@ void sub(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void mul(stack_t **stack, unsigned int line_number)
+void mul(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
@@ -47,7 +47,7 @@ void mul(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void divi(stack_t **stack, unsigned int line_number)\
+void divi(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
@@ -60,7 +60,7 @@ void divi(stack_t **stack, unsigned int line_number)\
  * Return:
  */
 
-void mod(stack_t **stack, unsigned int line_number)
+void mod(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }

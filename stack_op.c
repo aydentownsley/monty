@@ -9,7 +9,7 @@
  * Return: void
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 	int n;
 
@@ -29,7 +29,7 @@ void push(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void pop(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 	if (stack && *stack)
 		delete_begin(stack);
@@ -45,7 +45,7 @@ void pop(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void swap(stack_t **stack, unsigned int line_number)
+void swap(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
@@ -58,7 +58,7 @@ void swap(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void rot_l(stack_t **stack, unsigned int line_number)
+void rot_l(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
@@ -71,7 +71,7 @@ void rot_l(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void rot_r(stack_t **stack, unsigned int line_number)
+void rot_r(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 
 }
