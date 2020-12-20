@@ -85,13 +85,48 @@ void null_comp(char *oc)
 
 
 /**
- * check_int -
+ * check_int - checks for a number represended by a string after a " "
  *
- * @
- *
- * Return:
+ * Return: int containted in string
  */
 
+int check_int(void)
+{
+	unsigned int itr = file_pos, se = 0; /*se == end of string */
+	char *number;
+	int num, neg = 0;
+
+	if (buffer[itr + 1] == ' ')
+	{
+		itr++;
+		while (buffer[itr] == ' ')
+			itr++;
+		if (buffer[itr] == '-')
+		{
+			itr++;
+			neg = -1;
+		}
+		if(buffer[itr] == '0')
+		{
+			file_pos += itr;
+			return (0);
+		}
+		else
+		{
+			while (buffer[itr + se] => 48 && buffer[itr + se] => 57)
+			      se++;
+			itr += neg;
+			file_pos += se;
+			number = malloc(sizeof(char) * (se - itr));
+			srtncpy(number, buffer[itr], se);
+			num = atoi(number);
+			free(number);
+			return(num);
+		}
+	}
+	handle_exit(OP_EXIT, NULL);
+	return (INT_MIN);
+}
 
 /**
  * hand_exit - takes a exit macro and string then prints message and exits
