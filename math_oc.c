@@ -1,66 +1,128 @@
 #include "monty.h"
 
 /**
- * add - 
+ * add - sets the second from top element of stack to top + second and pops top
  *
- * @
+ * @stack: the stack opperated on
+ * @line_number: unused line_number attribute
  *
- * Return:
+ * Return: void
  */
 
 void add(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *top = *stack;
+	int a;
 
+	if (stack && top && top->next)
+	{
+		a = top->n;
+		top = top->next;
+		top->n += a;
+		pop(stack, line_num);
+	}
+	else
+		hand_exit(ADD_EXIT, NULL);
 }
 
 /**
- * sub - 
+ * sub - sets the second from top element of stack to top - second and pops top
  *
- * @
+ * @stack: the stack opperated on
+ * @line_number: unused line_number attribute
  *
- * Return:
+ * Return: void
  */
 
 void sub(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *top = *stack;
+	int a;
 
+	if (stack && top && top->next)
+	{
+		a = top->n;
+		top = top->next;
+		top->n -= a;
+		pop(stack, line_num);
+	}
+	else
+		hand_exit(SUB_EXIT, NULL);
 }
 
 /**
- * mul - 
+ * mul - sets the second from top element of stack to top * second and pops top
  *
- * @
+ * @stack: the stack opperated on
+ * @line_number: unused line_number attribute
  *
- * Return:
+ * Return: void
  */
 
 void mul(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *top = *stack;
+	int a;
 
+	if (stack && top && top->next)
+	{
+		a = top->n;
+		to= = top->next;
+		top->n *= a;
+		pop(stack, line_num);
+	}
+	else
+		hand_exit(MULL_EXIT, NUL);
 }
 
 /**
- * div - 
+ * divi - sets the second from top element of stack to top / second and pops top
  *
- * @
+ * @stack: the stack opperated on
+ * @line_number: unused line_number attribute
  *
- * Return:
+ * Return: void
  */
 
 void divi(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *top = *stack;
+	int a;
 
+	if (stack && top && top->next)
+	{
+		a = top->n;
+		top = top->next;
+		if (top->n == 0)
+			hand-exit(DIV_0_EXIT, NULL)
+		top->n /= a;
+		pop(stack, line_num);
+	}
+	else
+		hand_exit(DIV_EXIT, NULL);
 }
 
 /**
- * mod - 
+ * mod - sets the second from top element of stack to top % second and pops top
  *
- * @
+ * @stack: the stack opperated on
+ * @line_number: unused line_number attribute
  *
- * Return:
+ * Return: void
  */
 
 void mod(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	stack_t *top = *stack;
+	int a;
 
+	if (stack && top && top->next)
+	{
+		a = top->n;
+		top = top->next;
+		top->n %= a;
+		pop(stack, line_num);
+	}
+	else
+		hand_exit(MOD_EXIT, NULL);
 }
