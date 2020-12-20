@@ -24,6 +24,8 @@ extern size_t line_num;
 extern stack_t **head;
 extern size_t ex_stat;
 extern int stack_queue;
+extern char *buffer;
+extern unsigned int file_pos;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
