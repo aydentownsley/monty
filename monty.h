@@ -1,6 +1,16 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+/*____ INCLUDES ____*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <stddef.h>
+
+/*____ MACROS ____*/
+
 #define STACK (0)
 #define QUEUE (1)
 #define MALLOC_EXIT (0)
@@ -20,12 +30,7 @@
 #define IN_PCHAR_EXIT (14)
 #define PCHAR_EXIT (15)
 
-extern size_t line_num;
-extern stack_t **head;
-extern size_t ex_stat;
-extern int stack_queue;
-extern char *buffer;
-extern unsigned int file_pos;
+/*____ STRUCTURES ____*/
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -59,10 +64,19 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-size_t get_size(int fd);
+/*____ GLOBAL VARIABLES ____*/
+
+extern unsigned int line_num;
+extern int stack_queue;
+extern char *buffer;
+extern unsigned int file_pos;
+
+/*____ PROTOTYPES _____*/
+
+size_t get_size(FILE *fp);
 void open_and_read(char *file);
 int main(int argc, char *argv[]);
-void check_op(void);
+void check_op(stack_t **stack);
 void null_comp(char *oc);
 int check_int(void);
 void hand_exit(int ex, char *str);
@@ -78,7 +92,12 @@ void p_str(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
-void div(stack_t **stack, unsigned int line_number);
+void divi(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
+stack_t *add_begin(stack_t **stack, const int n);
+stack_t *add_end(stack_t **stack, const int n);
+void delete_begin(stack_t **stack);
+void delete_end(stack_t **stack);
+void free_stack(stack_t *stack);
 
 #endif /* MONTY_H */

@@ -47,7 +47,7 @@ void mul(stack_t **stack, unsigned int line_number)
  * Return:
  */
 
-void div(stack_t **stack, unsigned int line_number)\
+void divi(stack_t **stack, unsigned int line_number)\
 {
 
 }

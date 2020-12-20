@@ -1,16 +1,24 @@
 #include "monty.h"
 
 /**
- * push -
+ * push - adds a node to a list at the front
+ * with n (integer) stored in node
  *
- * @
+ * @stack: head of stack/queue (list)
  *
- * Return:
+ * Return: void
  */
 
-voi push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
+	int n;
 
+	n = check_int();
+
+	if (stack_queue == 0)
+		add_begin(stack, n);
+	else if (stack_queue == 1)
+		add_end(stack, n);
 }
 
 /**
@@ -23,7 +31,10 @@ voi push(stack_t **stack, unsigned int line_number)
 
 void pop(stack_t **stack, unsigned int line_number)
 {
-
+	if (stack && *stack)
+		delete_begin(stack);
+	else
+		hand_exit(POP_EXIT, NULL);
 }
 
 /**

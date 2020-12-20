@@ -9,7 +9,7 @@
  * ''needed to advance buffer correctly
  */
 
-void check_op(void)
+void check_op(stack_t **stack)
 {
 	int itr = file_pos, idx = 0;
 	char *oc;
@@ -19,7 +19,7 @@ void check_op(void)
 		{"pop", pop}, {"swap", swap}, {"rotl", rot_l},
 		{"rotr", rot_r}, {"pint", p_int}, {"pall", p_all},
 		{"pchr", p_char}, {"pstr", p_str}, {"add", add},
-		{"sub", sub}, {"mul", mul}, {"div", div}, {"mod", mod},
+		{"sub", sub}, {"mul", mul}, {"div", divi}, {"mod", mod},
 		{"nop", NULL},	{NULL, NULL}
 	};
 
@@ -39,13 +39,13 @@ void check_op(void)
 	if (op_f)
 	{
 		free(oc);
-		op_f(*head, line_num);
+		op_f(stack, line_num);
 		file_pos += itr;
 		return;
 	}
 	else if (buffer[itr + 1] == ' ' || buffer[itr + 1] == '\n')
 	{
-		null_comp(oc));
+		null_comp(oc);
 		return;
 	}
 	hand_exit(OP_EXIT, oc);
@@ -80,9 +80,8 @@ void null_comp(char *oc)
 		}
 		else
 			free(oc);
-		return
+		return;
 }
-
 
 /**
  * check_int - checks for a number represended by a string after a " "
@@ -113,19 +112,19 @@ int check_int(void)
 		}
 		else
 		{
-			while (buffer[itr + se] => 48 && buffer[itr + se] => 57)
+			while (buffer[itr + se] >= 48 && buffer[itr + se] >= 57)
 			      se++;
 			itr += neg;
 			file_pos += se;
 			number = malloc(sizeof(char) * (se - itr));
-			srtncpy(number, buffer[itr], se);
+			strncpy(number, (buffer + itr), se);
 			num = atoi(number);
 			free(number);
 			return(num);
 		}
 	}
-	handle_exit(OP_EXIT, NULL);
-	return (INT_MIN);
+	hand_exit(OP_EXIT, NULL);
+	return (58008);
 }
 
 /**
@@ -146,9 +145,9 @@ void hand_exit(int ex, char *str)
 	case OP_EXIT:
 		printf("L%u: unknown instruction %s", line_num, str);
 		free(str);
-		exit(EXIT_STATUS);
+		exit(EXIT_FAILURE);
 	case OPEN_EXIT:
-		printf("Error: Can't open file %s\n", file);
+		printf("Error: Can't open file %s\n", str);
 		exit(EXIT_FAILURE);
 	case ARG_EXIT:
 		printf("USAGE: monty file\n");
@@ -159,7 +158,7 @@ void hand_exit(int ex, char *str)
 	case PINT_EXIT:
 		printf("L%u: can't pint, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
-	case POP_EIXT:
+	case POP_EXIT:
 		printf("L%u: can't pop an empty stack\n", line_num);
 		exit(EXIT_FAILURE);
 	case SWAP_EXIT:
@@ -171,7 +170,7 @@ void hand_exit(int ex, char *str)
 	case SUB_EXIT:
 		printf("L%u: can't sub, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
-	case MULL_EXIT:
+	case MUL_EXIT:
 		printf("L%u: can't mul, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	case DIV_EXIT:
@@ -180,8 +179,8 @@ void hand_exit(int ex, char *str)
 	case DIV_0_EXIT:
 		printf("L%u: division by zero\n", line_num);
 		exit(EXIT_FAILURE);
-	case MOD_DEXIT:
-       		printf("L%u: can't mod, stack too short\n");
+	case MOD_EXIT:
+       		printf("L%u: can't mod, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	case IN_PCHAR_EXIT:
 		printf("L%u: can't pchar, value out of range\n", line_num);
@@ -189,4 +188,5 @@ void hand_exit(int ex, char *str)
 	case PCHAR_EXIT:
 		printf("L%u: can't pchar, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
+	}
 }

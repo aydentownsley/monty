@@ -8,11 +8,11 @@
  * Return: size of file
  */
 
-size_t get_size(int fd)
+size_t get_size(FILE *fd)
 {
 	int total = 0;
 
-	fseek(fp, 0, SEEK_END);
+	fseek(fd, 0, SEEK_END);
 	total = ftell(fd) + 1;
 	rewind(fd);
 	return (total);
@@ -29,18 +29,18 @@ size_t get_size(int fd)
 
 void open_and_read(char *file)
 {
-	size_t file_size;
-	int fd, rd;
+	size_t file_size, rp;
+	FILE *fp;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	fp = fopen(file, "r");
+	if (fp == NULL)
 		hand_exit(OPEN_EXIT, NULL);
-	file_size = get_size(fd);
+	file_size = get_size(fp);
 	buffer = malloc(sizeof(char) * file_size);
 	if (buffer == NULL)
 		hand_exit(MALLOC_EXIT, NULL);
-	rd = read(fd, buffer, file_size);
-	if (rd == -1)
+	rp = fread(buffer, file_size, sizeof(char), fp);
+	if (rp == 0)
 		hand_exit(OPEN_EXIT, NULL);
 }
 
@@ -55,21 +55,21 @@ void open_and_read(char *file)
 
 int main(int argc, char *argv[])
 {
-	char *buffer;
-	long unsigned int i = 0;
+	char *buffer = NULL;
+	stack_t **stack = NULL;
 
 	line_num = 0;
 
 	if (argc != 2)
 		hand_exit(ARG_EXIT, NULL);
 
-	open_and_read(buffer, argv[1]);
+	open_and_read(argv[1]);
 
 	while (buffer[file_pos])
 	{
 		if (buffer[file_pos] == '#')
 		{
-			while (buffer != '\n')
+			while (buffer[file_pos] != '\n')
 				file_pos++;
 			file_pos++;
 		}
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 				file_pos++;
 		}
 		else
-			check_op();
+			check_op(stack);
 	}
 	return (0);
 }

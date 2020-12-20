@@ -3,14 +3,14 @@
 /**
  * add_begin - add node to beginnig of stack/queue
  *
- * @head: head of list
+ * @stack: head of list
  * @n: int in new node
  *
  * Return: address of new node
  * OR EXIT STATUS
  */
 
-stack_t *add_begin(stack_t **head, const int n)
+stack_t *add_begin(stack_t **stack, const int n)
 {
 	stack_t *new;
 
@@ -22,10 +22,10 @@ stack_t *add_begin(stack_t **head, const int n)
 	new->n = n;
 	new->prev = NULL;
 
-	new->next = *head;
-	if (*head != NULL)
-		(*head)->prev = new;
-	*head = new;
+	new->next = *stack;
+	if (*stack != NULL)
+		(*stack)->prev = new;
+	*stack = new;
 
 	return (new);
 }
@@ -33,14 +33,14 @@ stack_t *add_begin(stack_t **head, const int n)
 /**
  * add_end - add node to end of stack/queue
  *
- * @head: head of list
+ * @stack: head of list
  * @n: int in new node
  *
  * Return: address of new node
  * OR EXIT STATUS
  */
 
-stack_t *add_end(stack_t **head, const int n)
+stack_t *add_end(stack_t **stack, const int n)
 {
 	stack_t *new, *temp;
 
@@ -52,13 +52,13 @@ stack_t *add_end(stack_t **head, const int n)
 	new->n = n;
 	new->next = NULL;
 
-	if (*head == NULL)
+	if (*stack == NULL)
 	{
-		*head = new;
+		*stack = new;
 	}
 	else
 	{
-		temp = *head;
+		temp = *stack;
 		while (temp->next != NULL)
 			temp = temp->next;
 		new->prev = temp;
@@ -71,74 +71,67 @@ stack_t *add_end(stack_t **head, const int n)
 /**
  * delete_begin - delete node at beginning of stack/queue
  *
- * @head: head of list
+ * @stack: head of list
  * @n: int in new node
  *
  * Return: int value of node
  * OR EXIT STATUS
  */
 
-int delete_begin(stack_t **head)
+void delete_begin(stack_t **stack)
 {
-	stack_t *curr = *head;
-	int value;
+	stack_t *curr = *stack;
 
-	if (!head || !(*head))
-		return (-1);
+	if (!stack|| !(*stack))
+		hand_exit(POP_EXIT ,NULL);
 
-	value = head->n;
+	*stack = curr->next;
+	curr->next->prev = NULL;
 
-	*head = *head->next;
-	*head->prev = NULL;
-
-	free(current);
-	return (value);
+	free(curr);
 }
 
 /**
  * delete_end - delete node at end of stack/queue
  *
- * @head: head of list
+ * @stack: head of list
  * @n: int in new node
  *
  * Return: int value of node
  * OR EXIT STATUS
  */
 
-int delete_end(stack_t **head)
+void delete_end(stack_t **stack)
 {
-        stack_t *curr = *head;
-        int value;
+        stack_t *curr = *stack;
 
-        if (!head || !(*head))
-                return (-1);
+        if (!stack || !(*stack))
+                return;
+
 	while (curr->next != NULL)
 		curr = curr->next;
 
-        value = curr->n;
-
 	curr->prev->next = NULL;
 
-        free(current);
-        return (value);
+        free(curr);
 }
 
 /**
  * free_stack - frees a stack/queue
  *
- * @head: head of stack
+ * @stack: head of stack
  *
  * Return: VOID
  */
 
-void free_stack(stack_t *head)
+void free_stack(stack_t *stack)
 {
 	stack_t *new;
 
-	while (head)
+	while (stack)
 	{
-		new = head->next;
-		free(head);
-		head = new;
+		new = stack->next;
+		free(stack);
+		stack = new;
 	}
 }
