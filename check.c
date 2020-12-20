@@ -9,9 +9,9 @@
  * ''needed to advance buffer correctly
  */
 
-int check_op(char *buffer)
+void check_op(void)
 {
-	int itr = 0, idx = 0;
+	int itr = file_pos, idx = 0;
 	char *oc;
 	void (*op_f) (stack_t **stack, unsigned int line_number);
 	instruction_t oca[] = {
@@ -40,11 +40,13 @@ int check_op(char *buffer)
 	{
 		free(oc);
 		op_f(*head, line_num);
-		return (itr);
+		file_pos += itr;
+		return;
 	}
 	else if (buffer[itr + 1] == ' ' || buffer[itr + 1] == '\n')
 	{
-		return ((int) null_comp(oc));
+		null_comp(oc));
+		return;
 	}
 	hand_exit(OP_EXIT, oc);
 }
@@ -57,30 +59,28 @@ int check_op(char *buffer)
  * Return: size of opcode, 1 on fail
  */
 
-size_t null_comp(char *oc)
+void null_comp(char *oc)
 {
 		if (strcmp(oc, "nop"))
 		{
 			free(oc);
-			return (strlen(oc));
+			file_pos += (strlen(oc));
 		}
 		else if (strcmp(oc, "stack"))
 		{
 			stack_queue = STACK;
 			free(oc);
-			return (strlen(oc));
+			file_pos += (strlen(oc));
 		}
 		else if (strcmp(oc, "queue"))
 		{
 			stack_queue = QUEUE;
 			free(oc);
-			return (strlen(oc));
+			file_pos += (strlen(oc));
 		}
 		else
-		{
 			free(oc);
-			return (1);
-		}
+		return
 }
 
 
@@ -105,53 +105,53 @@ size_t null_comp(char *oc)
 void hand_exit(int ex, char *str)
 {
 	switch (ex) {
-	case 0:
+	case MALLOC_EXIT:
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
-	case 1:
+	case OP_EXIT:
 		printf("L%u: unknown instruction %s", line_num, str);
 		free(str);
 		exit(EXIT_STATUS);
-	case 2:
+	case OPEN_EXIT:
 		printf("Error: Can't open file %s\n", file);
 		exit(EXIT_FAILURE);
-	case 3:
+	case ARG_EXIT:
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
-	case 4:
+	case PUSH_INT_EXIT:
 		printf("L%u: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
-	case 5:
+	case PINT_EXIT:
 		printf("L%u: can't pint, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
-	case 6:
+	case POP_EIXT:
 		printf("L%u: can't pop an empty stack\n", line_num);
 		exit(EXIT_FAILURE);
-	case 7:
+	case SWAP_EXIT:
 		printf("L%u: can't swap, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
-	case 8:
+	case ADD_EXIT:
 		printf("L%u: can't add, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
-	case 9:
+	case SUB_EXIT:
 		printf("L%u: can't sub, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
-	case 10:
+	case MULL_EXIT:
 		printf("L%u: can't mul, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
-	case 11:
+	case DIV_EXIT:
 		printf("L%u: can't div, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
-	case 12:
+	case DIV_0_EXIT:
 		printf("L%u: division by zero\n", line_num);
 		exit(EXIT_FAILURE);
-	case 13:
+	case MOD_DEXIT:
        		printf("L%u: can't mod, stack too short\n");
 		exit(EXIT_FAILURE);
-	case 14:
+	case IN_PCHAR_EXIT:
 		printf("L%u: can't pchar, value out of range\n", line_num);
 		exit(EXIT_FAILURE);
-	case 15:
+	case PCHAR_EXIT:
 		printf("L%u: can't pchar, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
 }
