@@ -124,7 +124,9 @@ int check_int(void)
 			return(num);
 		}
 	}
-	handle_exit(OP_EXIT, NULL);
+	else
+		handle_exit (OP_EXIT, NULL)
+	handle_exit(PUSH_INT_EXIT, NULL);
 	return (INT_MIN);
 }
 
