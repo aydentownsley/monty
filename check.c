@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * check_op -
+ * check_op - checks for opcode
  *
- * @buffer:
+ * @buffer: Location in line to check for opcode
  *
- * Return: length of opcode
+ * Return: length of opcode, on fail return 1
  * ''needed to advance buffer correctly
  */
 
@@ -54,7 +54,7 @@ int check_op(char *buffer)
  *
  * @oc: opcode
  *
- * Return: size of opcode
+ * Return: size of opcode, 1 on fail
  */
 
 size_t null_comp(char *oc)
@@ -92,12 +92,14 @@ size_t null_comp(char *oc)
  * Return:
  */
 
+
 /**
- * hand_exit -
+ * hand_exit - takes a exit macro and string then prints message and exits
  *
- * @
+ * @ex: exit macro to decide message
+ * @str: string that caused the error
  *
- * Return:
+ * Return: none
  */
 
 void hand_exit(int ex, char *str)
