@@ -9,7 +9,7 @@
  * Return: void
  */
 
-void add(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top = *stack;
 	int a;
@@ -19,10 +19,10 @@ void add(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		a = top->n;
 		top = top->next;
 		top->n += a;
-		pop(stack, line_num);
+		pop(stack, line_number);
 	}
 	else
-		hand_exit(ADD_EXIT, NULL);
+		/*hand_exit(ADD_EXIT, NULL)*/;
 }
 
 /**
@@ -34,7 +34,7 @@ void add(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * Return: void
  */
 
-void sub(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void sub(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top = *stack;
 	int a;
@@ -44,10 +44,10 @@ void sub(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		a = top->n;
 		top = top->next;
 		top->n -= a;
-		pop(stack, line_num);
+		pop(stack, line_number);
 	}
 	else
-		hand_exit(SUB_EXIT, NULL);
+	/*	hand_exit(SUB_EXIT, NULL)*/;
 }
 
 /**
@@ -59,7 +59,7 @@ void sub(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * Return: void
  */
 
-void mul(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top = *stack;
 	int a;
@@ -69,10 +69,10 @@ void mul(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		a = top->n;
 		top = top->next;
 		top->n *= a;
-		pop(stack, line_num);
+		pop(stack, line_number);
 	}
 	else
-		hand_exit(MUL_EXIT, NULL);
+		/*hand_exit(MUL_EXIT, NULL)*/;
 }
 
 /**
@@ -84,7 +84,7 @@ void mul(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * Return: void
  */
 
-void divi(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void divi(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top = *stack;
 	int a;
@@ -96,10 +96,10 @@ void divi(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		if (top->n == 0)
 			hand_exit(DIV_0_EXIT, NULL);
 		top->n = top->n / a;
-		pop(stack, line_num);
+		pop(stack, line_number);
 	}
 	else
-		hand_exit(DIV_EXIT, NULL);
+		/*hand_exit(DIV_EXIT, NULL)*/;
 }
 
 /**
@@ -111,7 +111,7 @@ void divi(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * Return: void
  */
 
-void mod(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *top = *stack;
 	int a;
@@ -121,8 +121,8 @@ void mod(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		a = top->n;
 		top = top->next;
 		top->n %= a;
-		pop(stack, line_num);
+		pop(stack, line_number);
 	}
 	else
-		hand_exit(MOD_EXIT, NULL);
+	/*	hand_exit(MOD_EXIT, NULL)*/;
 }
