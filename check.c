@@ -44,51 +44,22 @@ void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 	}
 	else if (buffer[itr + 1] == ' ' || buffer[itr + 1] == '\n')
 	{
-		null_comp(oc);
+		/* null_comp(oc); no longer valid due to loss of global variables */
 		return;
 	}
 	hand_exit(OP_EXIT, oc, line_number, buffer);
 }
 
 /**
- * null_comp - checks the null function pointers
- *
- * @oc: opcode
- *
- * Return: size of opcode, 1 on fail
- */
-
-void null_comp(char *oc)
-{
-		if (strcmp(oc, "nop"))
-		{
-			free(oc);
-			file_pos += (strlen(oc));
-		}
-		else if (strcmp(oc, "stack"))
-		{
-			stack_queue = STACK;
-			free(oc);
-			file_pos += (strlen(oc));
-		}
-		else if (strcmp(oc, "queue"))
-		{
-			stack_queue = QUEUE;
-			free(oc);
-			file_pos += (strlen(oc));
-		}
-		else
-			free(oc);
-		return;
-}
-
-/**
  * check_int - checks for a number represended by a string after a " "
+ *
+ * @line_number: the current line number
+ * @buffer: string of text on current line
  *
  * Return: int containted in string
  */
 
-int check_int(unsigned int line_number, buffer)
+int check_int(unsigned int line_number, char *buffer)
 {
 	unsigned int itr = 0, se = 0; /*se == end of string */
 	char *number, push[] = "push ";
@@ -138,12 +109,14 @@ int check_int(unsigned int line_number, buffer)
  *
  * @ex: exit macro to decide message
  * @str: string that caused the error
+ * @line_number:
  *
  * Return: none
  */
 
-void hand_exit(int ex, char *str, unsinged int line_number)
+void hand_exit(int ex, char *str, unsigned int line_number)
 {
+	/*Any error message must be printed on stderr*/
 	switch (ex) {
 	case MALLOC_EXIT:
 		printf("Error: malloc failed\n");
@@ -178,7 +151,6 @@ void hand_exit(int ex, char *str, unsinged int line_number)
 	case PCHAR_EXIT:
 		printf("L%u: can't pchar, stack empty\n", line_num);
 	}
-	free(buffer)
 	free(str)
  	exit(EXIT_FAILURE);
 }

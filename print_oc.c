@@ -8,7 +8,7 @@
  * Return:
  */
 
-void p_int(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void p_int(stack_t **stack, unsigned int line_number)
 {
 	stack_t *cursor = *stack;
 
@@ -27,7 +27,7 @@ void p_int(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * Return:
  */
 
-void p_all(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void p_all(stack_t **stack, unsigned int line_number)
 {
 	stack_t *cursor = *stack;
 

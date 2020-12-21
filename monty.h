@@ -11,8 +11,6 @@
 
 /*____ MACROS ____*/
 
-#define STACK (0)
-#define QUEUE (1)
 #define MALLOC_EXIT (0)
 #define OP_EXIT (1)
 #define OPEN_EXIT (2)
@@ -29,6 +27,8 @@
 #define MOD_EXIT (13)
 #define IN_PCHAR_EXIT (14)
 #define PCHAR_EXIT (15)
+#define STACK (16)
+#define QUEUE (17)
 
 /*____ STRUCTURES ____*/
 
@@ -66,7 +66,7 @@ typedef struct instruction_s
 
 /*____ GLOBAL VARIABLES ____*/
 
-extern FILE *fp;
+extern int status = STACK;
 
 /*____ PROTOTYPES _____*/
 

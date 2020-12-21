@@ -41,7 +41,14 @@ int main(int argc, char *argv[])
 			else
 				f = check_op(stack, line_number, (buffer + i));
 			if (f) /*need to check if its push so we call check int*/
+			{
 				f(stack, line_number);
+			/*check global int for exit status or stack/queue*/
+				if (status < 16)
+					hand_exit()
+			/* if exit status call exit function */
+				break;
+			}
 		}
 		line_number++;
 	}
