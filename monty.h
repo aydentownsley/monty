@@ -72,9 +72,8 @@ extern int status = STACK;
 
 void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 (stack_t **stack, unsigned int line_number);
-void null_comp(char *oc);
 int check_int(unsigned int line_number, char *buffer);
-void hand_exit(int ex, char *str, unsigned int line_number);
+void hand_exit(char *buffer, unsigned int line_number, FILE *fp);
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);

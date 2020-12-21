@@ -16,19 +16,19 @@ void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 	char *oc;
 	void (*op_f) (stack_t **stack, unsigned int line_number);
 	instruction_t oca[] = {
-		{"stack", NULL}, {"queue", NULL}, {"push", push},
+		{"stack", stack}, {"queue", queue}, {"push", push},
 		{"pop", pop}, {"swap", swap}, {"rotl", rot_l},
 		{"rotr", rot_r}, {"pint", p_int}, {"pall", p_all},
 		{"pchr", p_char}, {"pstr", p_str}, {"add", add},
 		{"sub", sub}, {"mul", mul}, {"div", divi}, {"mod", mod},
-		{"nop", NULL},	{NULL, NULL}
+		{"nop", nop},	{NULL, NULL}
 	};
 
 	while (buffer[itr] != ' ' || buffer[itr] != '\n')
 		itr++;
 	oc = malloc((sizeof(char) * itr) + 1);
 	if (oc == NULL)
-		hand_exit(MALLOC_EXIT, NULL, line_number, buffer);
+		/*hand_exit(MALLOC_EXIT, buffer, line_number, fp)*/;
 	oc = strncpy(oc, buffer, itr);
 	while (oca[idx].opcode)
 	{
@@ -47,7 +47,7 @@ void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 		/* null_comp(oc); no longer valid due to loss of global variables */
 		return;
 	}
-	hand_exit(OP_EXIT, oc, line_number, buffer);
+	/*hand_exit(OP_EXIT, buffer, line_number, fp)*/;
 }
 
 /**
@@ -59,7 +59,7 @@ void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
  * Return: int containted in string
  */
 
-int check_int(unsigned int line_number, char *buffer)
+int check_int(char *buffer)
 {
 	unsigned int itr = 0, se = 0; /*se == end of string */
 	char *number, push[] = "push ";
@@ -70,7 +70,7 @@ int check_int(unsigned int line_number, char *buffer)
 		itr++;
 	oc = malloc((sizeof(char) * 6);
 	if (oc == NULL)
-		hand_exit(MALLOC_EXIT, NULL, line_number, buffer);
+		/*hand_exit(MALLOC_EXIT, NULL, line_number, buffer)*/;
 	oc = strncpy(oc, buffer, 5));
 	if (strcomp(oc, push) != 0)
 	{
@@ -92,7 +92,7 @@ int check_int(unsigned int line_number, char *buffer)
 			if (number == NULL)
 			{
 				free(oc);
-				hand_exit(MALLOC_EXIT, NULL, line_number, buffer);
+				/*hand_exit(MALLOC_EXIT, NULL, line_number, buffer)*/;
 			}
 			strncpy(number, (buffer + itr), se);
 			num = atoi(number);
@@ -100,7 +100,7 @@ int check_int(unsigned int line_number, char *buffer)
 			return(num);
 		}
 	}
-	hand_exit(OP_EXIT, NULL, line_number, buffer);
+	/*hand_exit(OP_EXIT, NULL, line_number, buffer)*/;
 	return (58008);
 }
 
@@ -114,43 +114,44 @@ int check_int(unsigned int line_number, char *buffer)
  * Return: none
  */
 
-void hand_exit(int ex, char *str, unsigned int line_number)
+void hand_exit(char *buffer, unsigned int line_number, FILE *fp)
 {
 	/*Any error message must be printed on stderr*/
-	switch (ex) {
+	switch (status) {
 	case MALLOC_EXIT:
 		printf("Error: malloc failed\n");
 	case OP_EXIT:
-		printf("L%u: unknown instruction %s", line_num, str);
+		printf("L%u: unknown instruction %s", line_number, str);
 	case OPEN_EXIT:
 		printf("Error: Can't open file %s\n", str);
 	case ARG_EXIT:
 		printf("USAGE: monty file\n");
 	case PUSH_INT_EXIT:
-		printf("L%u: usage: push integer\n", line_num);
+		printf("L%u: usage: push integer\n", line_number);
 	case PINT_EXIT:
-		printf("L%u: can't pint, stack empty\n", line_num);
+		printf("L%u: can't pint, stack empty\n", line_number);
 	case POP_EXIT:
-		printf("L%u: can't pop an empty stack\n", line_num);
+		printf("L%u: can't pop an empty stack\n", line_number);
 	case SWAP_EXIT:
-		printf("L%u: can't swap, stack too short\n", line_num);
+		printf("L%u: can't swap, stack too short\n", line_number);
 	case ADD_EXIT:
-		printf("L%u: can't add, stack too short\n", line_num);
+		printf("L%u: can't add, stack too short\n", line_number);
 	case SUB_EXIT:
-		printf("L%u: can't sub, stack too short\n", line_num);
+		printf("L%u: can't sub, stack too short\n", line_number);
 	case MUL_EXIT:
-		printf("L%u: can't mul, stack too short\n", line_num);
+		printf("L%u: can't mul, stack too short\n", line_number);
 	case DIV_EXIT:
-		printf("L%u: can't div, stack too short\n", line_num);
+		printf("L%u: can't div, stack too short\n", line_number);
 	case DIV_0_EXIT:
-		printf("L%u: division by zero\n", line_num);
+		printf("L%u: division by zero\n", line_number);
 	case MOD_EXIT:
-       		printf("L%u: can't mod, stack too short\n", line_num);
+       		printf("L%u: can't mod, stack too short\n", line_number);
 	case IN_PCHAR_EXIT:
-		printf("L%u: can't pchar, value out of range\n", line_num);
+		printf("L%u: can't pchar, value out of range\n", line_number);
 	case PCHAR_EXIT:
-		printf("L%u: can't pchar, stack empty\n", line_num);
+		printf("L%u: can't pchar, stack empty\n", line_number);
 	}
-	free(str)
+	free(fp);
+	free(buffer);
  	exit(EXIT_FAILURE);
 }

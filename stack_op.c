@@ -34,7 +34,7 @@ void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	if (stack && *stack)
 		delete_begin(stack);
 	else
-		hand_exit(POP_EXIT, NULL);
+	/*	hand_exit(POP_EXIT, NULL)*/;
 }
 
 /**
@@ -57,7 +57,7 @@ void swap(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		head->n = headnext->n;
 		headnext->n = tmp;
 	}
-	hand_exit(SWAP_EXIT, NULL);
+	/*hand_exit(SWAP_EXIT, NULL)*/;
 }
 
 /**
@@ -68,7 +68,7 @@ void swap(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * Return: void, mods stack/queue
  */
 
-void rot_l(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void rot_l(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
 	int tmp;
@@ -78,7 +78,7 @@ void rot_l(stack_t **stack, unsigned int line_number __attribute__((unused)))
 
 	tmp = head->n;
 
-	pop(stack, line_num);
+	pop(stack, line_number);
 
 	add_end(stack, tmp);
 }
