@@ -34,7 +34,7 @@ void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	if (stack && *stack)
 		delete_begin(stack);
 	else
-	/*	hand_exit(POP_EXIT, NULL)*/;
+		status = POP_EXIT;
 }
 
 /**
@@ -57,7 +57,8 @@ void swap(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		head->n = headnext->n;
 		headnext->n = tmp;
 	}
-	/*hand_exit(SWAP_EXIT, NULL)*/;
+	else
+		status = SWAP_EXIT;
 }
 
 /**

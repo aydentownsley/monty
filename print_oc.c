@@ -13,7 +13,7 @@ void p_int(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	stack_t *cursor = *stack;
 
 	if (cursor == NULL || stack == NULL)
-		/*hand_exit(PINT_EXIT, NULL)*/;
+		status = PINT_EXIT;
 
 	if (cursor != NULL)
 		printf("%d\n", cursor->n);
@@ -32,7 +32,7 @@ void p_all(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	stack_t *cursor = *stack;
 
 	if (cursor == NULL || stack == NULL)
-	/*	hand_exit(PINT_EXIT, NULL)*/;
+		status PINT_EXIT;
 
 	while (cursor != NULL)
 	{

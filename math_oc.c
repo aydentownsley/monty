@@ -22,7 +22,7 @@ void add(stack_t **stack, unsigned int line_number)
 		pop(stack, line_number);
 	}
 	else
-		/*hand_exit(ADD_EXIT, NULL)*/;
+		status = ADD_EXIT;
 }
 
 /**
@@ -47,7 +47,7 @@ void sub(stack_t **stack, unsigned int line_number)
 		pop(stack, line_number);
 	}
 	else
-	/*	hand_exit(SUB_EXIT, NULL)*/;
+		status = SUB_EXIT;
 }
 
 /**
@@ -72,7 +72,7 @@ void mul(stack_t **stack, unsigned int line_number)
 		pop(stack, line_number);
 	}
 	else
-		/*hand_exit(MUL_EXIT, NULL)*/;
+		status = MUL_EXIT;
 }
 
 /**
@@ -94,12 +94,15 @@ void divi(stack_t **stack, unsigned int line_number)
 		a = top->n;
 		top = top->next;
 		if (top->n == 0)
-			hand_exit(DIV_0_EXIT, NULL);
+		{
+			status = DIV_0_EXIT;
+			break;
+		}
 		top->n = top->n / a;
 		pop(stack, line_number);
 	}
 	else
-		/*hand_exit(DIV_EXIT, NULL)*/;
+		status = DIV_EXIT;
 }
 
 /**
@@ -124,5 +127,5 @@ void mod(stack_t **stack, unsigned int line_number)
 		pop(stack, line_number);
 	}
 	else
-	/*	hand_exit(MOD_EXIT, NULL)*/;
+		status = MOD_EXIT;
 }
