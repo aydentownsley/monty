@@ -66,13 +66,13 @@ typedef struct instruction_s
 
 /*____ GLOBAL VARIABLES ____*/
 
-extern int status = STACK;
+int status = STACK;
 
 /*____ PROTOTYPES _____*/
 
 void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 (stack_t **stack, unsigned int line_number);
-int check_int(unsigned int line_number, char *buffer);
+int check_int(char *buffer);
 void hand_exit(char *buffer, unsigned int line_number, FILE *fp);
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
@@ -93,5 +93,8 @@ stack_t *add_end(stack_t **stack, const int n);
 void delete_begin(stack_t **stack);
 void delete_end(stack_t **stack);
 void free_stack(stack_t *stack);
+void nop(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

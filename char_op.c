@@ -8,7 +8,7 @@
  * Return: void, prints character
  */
 
-void p_char(stack_t **stack, unsigned int line_number)
+void p_char(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 	stack_t *tmp;
 
@@ -21,7 +21,7 @@ void p_char(stack_t **stack, unsigned int line_number)
 			putchar('\n');
 		}
 		else
-		/*	hand_exit(IN_PCHAR_EXIT, NULL, line_number)*/;
+			status = IN_PCHAR_EXIT;
 	}
 /*	hand_exit(PCHAR_EXIT, NULL, line_number); */
 }
@@ -34,7 +34,7 @@ void p_char(stack_t **stack, unsigned int line_number)
  * Return: void, prints string
  */
 
-void p_str(stack_t **stack, unsigned int line_number)
+void p_str(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 	stack_t *tmp = *stack;
 
