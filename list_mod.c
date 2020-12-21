@@ -83,7 +83,7 @@ void delete_begin(stack_t **stack)
 	stack_t *curr = *stack;
 
 	if (!stack|| !(*stack))
-		hand_exit(POP_EXIT ,NULL);
+		status = POP_EXIT;
 
 	*stack = curr->next;
 	curr->next->prev = NULL;

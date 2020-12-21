@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	char *buffer = NULL;
 	stack_t **stack = NULL;
 	FILE *fp;
-	unsigned int i, line_number = 0;
+	unsigned int i, line_number = 1;
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 	if (argc != 2)
@@ -42,11 +42,17 @@ int main(int argc, char *argv[])
 				f = check_op(stack, line_number, (buffer + i));
 			if (f) /*need to check if its push so we call check int*/
 			{
-				f(stack, line_number);
-			/*check global int for exit status or stack/queue*/
+				if (f == push)
+					;
+				else
+					f(stack, line_number);
 				if (status < 16)
 					/*hand_exit(status, buffer, line_number, fp)*/;
-			/* if exit status call exit function */
+				break;
+			}
+			else
+			{
+				/*error invalid op code*/
 				break;
 			}
 		}

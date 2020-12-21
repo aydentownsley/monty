@@ -12,7 +12,7 @@
 void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 (stack_t **stack, unsigned int line_number)
 {
-	int itr= 0, idx = 0;
+	int itr = 0, idx = 0;
 	char *oc;
 	void (*op_f) (stack_t **stack, unsigned int line_number);
 	instruction_t oca[] = {
@@ -21,33 +21,28 @@ void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 		{"rotr", rot_r}, {"pint", p_int}, {"pall", p_all},
 		{"pchr", p_char}, {"pstr", p_str}, {"add", add},
 		{"sub", sub}, {"mul", mul}, {"div", divi}, {"mod", mod},
-		{"nop", nop},	{NULL, NULL}
+		{"nop", nop}, {NULL, NULL}
 	};
 
 	while (buffer[itr] != ' ' || buffer[itr] != '\n')
 		itr++;
 	oc = malloc((sizeof(char) * itr) + 1);
 	if (oc == NULL)
-		/*hand_exit(MALLOC_EXIT, buffer, line_number, fp)*/;
+		status = MALLOC_EXIT;
 	oc = strncpy(oc, buffer, itr);
 	while (oca[idx].opcode)
 	{
 		if (strcmp(oca[idx].opcode, oc))
-			if (buffer[itr + 1] == ' ' || buffer[itr + 1] == '\n')
-				op_f = oca[idx].f;
+		{
+			op_f = oca[idx].f;
+			break;
+		}
 		idx++;
 	}
-	if (op_f)
-	{
-		free(oc);
-		return op_f;
-	}
-	else if (buffer[itr + 1] == ' ' || buffer[itr + 1] == '\n')
-	{
-		/* null_comp(oc); no longer valid due to loss of global variables */
-		return;
-	}
-	/*hand_exit(OP_EXIT, buffer, line_number, fp)*/;
+	if (oca[idx].f == NULL)
+		op_f = oca[idx].f;
+	free(oc);
+	return op_f;
 }
 
 /**
@@ -62,17 +57,16 @@ void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 int check_int(char *buffer)
 {
 	unsigned int itr = 0, se = 0; /*se == end of string */
-	char *number, push[] = "push ";
+	char *number, *oc, push[] = "push ";
 	int num, neg = 0;
-
 
 	while (buffer[itr] != 'p')
 		itr++;
-	oc = malloc((sizeof(char) * 6);
+	oc = malloc((sizeof(char) * 6));
 	if (oc == NULL)
-		/*hand_exit(MALLOC_EXIT, NULL, line_number, buffer)*/;
-	oc = strncpy(oc, buffer, 5));
-	if (strcomp(oc, push) != 0)
+		status = MALLOC_EXIT;
+	oc = strncpy(oc, buffer, 5);
+	if (strcmp(oc, push) != 0)
 	{
 		while (buffer[itr] == ' ')
 			itr++;
@@ -92,7 +86,7 @@ int check_int(char *buffer)
 			if (number == NULL)
 			{
 				free(oc);
-				/*hand_exit(MALLOC_EXIT, NULL, line_number, buffer)*/;
+				status = MALLOC_EXIT;
 			}
 			strncpy(number, (buffer + itr), se);
 			num = atoi(number);
@@ -100,7 +94,7 @@ int check_int(char *buffer)
 			return(num);
 		}
 	}
-	/*hand_exit(OP_EXIT, NULL, line_number, buffer)*/;
+	status = OP_EXIT;
 	return (58008);
 }
 
