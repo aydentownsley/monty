@@ -32,14 +32,11 @@ void (*check_op(char *buffer))
 	if (oc == NULL)
 		status = MALLOC_EXIT;
 	oc = strncpy(oc, buffer, itr);
-	printf("oc = %s\n", oc);
 	while (oca[idx].opcode)
 	{
-		printf("oca = %s\n", oca[idx].opcode);
 		if (!strcmp(oca[idx].opcode, oc))
 		{
 			op_f = oca[idx].f;
-			printf("attempting match\n");
 			break;
 		}
 		idx++;
@@ -59,48 +56,49 @@ void (*check_op(char *buffer))
  * Return: int containted in string
  */
 
-int check_int(char *buffer)
+int check_int(char *buffer, stack_t **stack)
 {
 	unsigned int itr = 0, se = 0; /*se == end of string */
-	char *number, *oc, push[] = "push ";
-	int num, neg = 0;
+	char *number;
+	int num = 0;
 
-	while (buffer[itr] != 'p')
-		itr++;
-	oc = malloc((sizeof(char) * 6));
-	if (oc == NULL)
-		status = MALLOC_EXIT;
-	oc = strncpy(oc, buffer, 5);
-	if (strcmp(oc, push) != 0)
+	while (!(buffer[itr] >= '0' && buffer[itr] <= '9') &&
+buffer[itr] != '-' && buffer[itr] != '\n')
+			itr++;
+	if(buffer[itr] == '0')
 	{
-		while (buffer[itr] == ' ')
-			itr++;
-		if (buffer[itr] == '-')
+		if (status == STACK)
+			add_begin(stack, num);
+		else if (status == QUEUE)
+			add_end(stack, num);
+	}
+	else
+	{
+		while ((buffer[itr + se] >= 48 && buffer[itr + se] >= 57)
+|| buffer[itr + se] == '-')
+		      se++;
+		number = malloc((sizeof(char) * se) + 2);
+		if (number == NULL)
 		{
-			itr++;
-			neg = -1;
-		}
-		if(buffer[itr] == '0')
-			return (0);
-		else
-		{
-			while (buffer[itr + se] >= 48 && buffer[itr + se] >= 57)
-			      se++;
-			itr += neg;
-			number = malloc(sizeof(char) * (se - itr));
-			if (number == NULL)
-			{
-				free(oc);
-				status = MALLOC_EXIT;
-			}
-			strncpy(number, (buffer + itr), se);
-			num = atoi(number);
 			free(number);
-			return(num);
+			status = MALLOC_EXIT;
+			return (-1);
 		}
+		strncpy(number, (buffer + itr), se + 2);
+		num = atoi(number);
+		if (num == 0)
+			return (-1);
+		free(number);
+		if (status == STACK)
+		{
+			add_begin(stack, num);
+		}
+		else if (status == QUEUE)
+			add_end(stack, num);
+		return(0);
 	}
 	status = OP_EXIT;
-	return (58008);
+	return (-1);
 }
 
 /**

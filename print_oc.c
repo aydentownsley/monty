@@ -29,11 +29,14 @@ void p_int(stack_t **stack, unsigned int line_number __attribute__((unused)))
 
 void p_all(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
-	stack_t *cursor = *stack;
+	stack_t *cursor = NULL;
 
-	if (cursor == NULL || stack == NULL)
+	if (*stack == NULL || stack == NULL)
+	{
 		status = PINT_EXIT;
-
+		return;
+	}
+	cursor = *stack;
 	while (cursor != NULL)
 	{
 		printf("%d\n", cursor->n);

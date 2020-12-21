@@ -12,7 +12,6 @@
 void push(stack_t **stack __attribute__((unused)),
 unsigned int line_number __attribute__((unused)))
 {
-	printf("calling push\n");
 	return;
 }
 
@@ -26,7 +25,6 @@ unsigned int line_number __attribute__((unused)))
 
 void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
-	printf("calling pop\n");
 	if (stack && *stack)
 		delete_begin(stack);
 	else

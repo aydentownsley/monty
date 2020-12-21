@@ -72,7 +72,7 @@ typedef struct instruction_s
 
 void (*check_op(char *buffer))
 (stack_t **stack, unsigned int line_number);
-int check_int(char *buffer);
+int check_int(char *buffer, stack_t **stack);
 void hand_exit(char *buffer, unsigned int line_number, FILE *fp);
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);

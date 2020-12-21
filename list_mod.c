@@ -12,7 +12,7 @@
 
 stack_t *add_begin(stack_t **stack, const int n)
 {
-	stack_t *new;
+	stack_t *new = NULL;
 
 	new = malloc(sizeof(stack_t));
 
@@ -22,9 +22,9 @@ stack_t *add_begin(stack_t **stack, const int n)
 	new->n = n;
 	new->prev = NULL;
 
-	new->next = *stack;
 	if (*stack != NULL)
 		(*stack)->prev = new;
+	new->next = *stack;
 	*stack = new;
 
 	return (new);

@@ -27,7 +27,10 @@ int main(int argc, char *argv[])
 		status = OPEN_EXIT;
 	buffer = malloc(sizeof(char));
 	if (buffer == NULL)
-		status = MALLOC_EXIT;
+			status = MALLOC_EXIT;
+	if (!stack)
+		stack = malloc(sizeof(stack_t *));
+	*stack = NULL;
 	while (0 < getline(&buffer, &buff_size, fp))
 	{
 		while (buffer[i])
@@ -46,12 +49,12 @@ int main(int argc, char *argv[])
 			if (f) /*need to check if its push so we call check int*/
 			{
 				if (f == push)
-					f(stack, line_number);
+					check_int(buffer, stack);
 				else
 					f(stack, line_number);
 				if (status < 16)
 				{
-					;
+					hand_exit(buffer, line_number, fp);
 				}
 				break;
 			}
