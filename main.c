@@ -19,14 +19,14 @@ int main(int argc, char *argv[])
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 	if (argc != 2)
-		/*hand_exit(ARG_EXIT, buffer, line_number, fp)*/;
+		status = ARG_EXIT;
 
 	fp = fopen(file, "r");
 	if (fp == NULL)
-		/*hand_exit(OPEN_EXIT, buffer, line_number, fp)*/;
+		status = OPEN_EXIT;
 	buffer = malloc(sizeof(char));
 	if (buffer == NULL)
-		/*hand_exit(MALLOC_EXIT, buffer, line_number, fp)*/;
+		status = MALLOC_EXIT;
 	while (0 < getline(&buffer, &buff_size, fp))
 	{
 		while (buffer[i])
@@ -47,7 +47,9 @@ int main(int argc, char *argv[])
 				else
 					f(stack, line_number);
 				if (status < 16)
-					/*hand_exit(status, buffer, line_number, fp)*/;
+				{
+					;
+				}
 				break;
 			}
 			else
