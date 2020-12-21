@@ -9,11 +9,11 @@
  * Return: void
  */
 
-void push(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void push(stack_t **stack, unsigned int line_number)
 {
 	int n;
 
-	n = check_int();
+	n = check_int(line_number);
 
 	if (stack_queue == 0)
 		add_begin(stack, n);
