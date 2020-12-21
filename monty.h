@@ -30,6 +30,10 @@
 #define STACK (16)
 #define QUEUE (17)
 
+/*____ GLOBAL VARIABLES ____*/
+
+int status;
+
 /*____ STRUCTURES ____*/
 
 /**
@@ -64,13 +68,9 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/*____ GLOBAL VARIABLES ____*/
-
-int status = STACK;
-
 /*____ PROTOTYPES _____*/
 
-void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
+void (*check_op(char *buffer))
 (stack_t **stack, unsigned int line_number);
 int check_int(char *buffer);
 void hand_exit(char *buffer, unsigned int line_number, FILE *fp);
@@ -94,7 +94,7 @@ void delete_begin(stack_t **stack);
 void delete_end(stack_t **stack);
 void free_stack(stack_t *stack);
 void nop(stack_t **stack, unsigned int line_number);
-void stack(stack_t **stack, unsigned int line_number);
+void stackf(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

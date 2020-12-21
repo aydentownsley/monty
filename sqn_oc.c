@@ -9,7 +9,7 @@
  * Return: void
  */
 
-void nop(stack_t **stack, unsigned int line_number)
+void nop(stack_t **stack __attribute__ ((unused)), unsigned int line_number __attribute__ ((unused)))
 {
 	return;
 }
@@ -23,9 +23,10 @@ void nop(stack_t **stack, unsigned int line_number)
  * Return: void
  */
 
-void stack(stack_t **stack, unsigned int line_number)
+void stackf(stack_t **stack __attribute__ ((unused)),
+unsigned int line_number __attribute__ ((unused)))
 {
-	return;
+	status = STACK;
 }
 
 /**
@@ -37,7 +38,8 @@ void stack(stack_t **stack, unsigned int line_number)
  * Return: void
  */
 
-void queue(stack_t **stack, unsigned int line_number)
+void queue(stack_t **stack __attribute__ ((unused)),
+unsigned int line_number __attribute__ ((unused)))
 {
-	return;
+	status = QUEUE;
 }

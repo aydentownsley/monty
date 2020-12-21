@@ -9,16 +9,11 @@
  * Return: void
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack __attribute__((unused)),
+unsigned int line_number __attribute__((unused)))
 {
-	int n;
-
-	n = check_int(line_number);
-
-	if (stack_queue == 0)
-		add_begin(stack, n);
-	else if (stack_queue == 1)
-		add_end(stack, n);
+	printf("calling push\n");
+	return;
 }
 
 /**
@@ -31,6 +26,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	printf("calling pop\n");
 	if (stack && *stack)
 		delete_begin(stack);
 	else

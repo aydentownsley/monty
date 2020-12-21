@@ -15,13 +15,14 @@ int main(int argc, char *argv[])
 	char *buffer = NULL;
 	stack_t **stack = NULL;
 	FILE *fp;
-	unsigned int i, line_number = 1;
+	unsigned int i = 0, line_number = 1;
 	void (*f)(stack_t **stack, unsigned int line_number);
+	status = STACK;
 
 	if (argc != 2)
 		status = ARG_EXIT;
 
-	fp = fopen(file, "r");
+	fp = fopen(argv[1], "r");
 	if (fp == NULL)
 		status = OPEN_EXIT;
 	buffer = malloc(sizeof(char));
@@ -39,11 +40,13 @@ int main(int argc, char *argv[])
 			else if (buffer[i] == '#' || buffer[i] == '\n')
 				break;
 			else
-				f = check_op(stack, line_number, (buffer + i));
+			{
+				f = check_op((buffer + i));
+			}
 			if (f) /*need to check if its push so we call check int*/
 			{
 				if (f == push)
-					;
+					f(stack, line_number);
 				else
 					f(stack, line_number);
 				if (status < 16)
@@ -59,7 +62,9 @@ int main(int argc, char *argv[])
 			}
 		}
 		line_number++;
+		i = 0;
 	}
-	fclose(fp)
+	free(buffer);
+	fclose(fp);
 	return (0);
 }

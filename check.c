@@ -9,14 +9,14 @@
  * ''needed to advance buffer correctly
  */
 
-void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
+void (*check_op(char *buffer))
 (stack_t **stack, unsigned int line_number)
 {
 	int itr = 0, idx = 0;
 	char *oc;
 	void (*op_f) (stack_t **stack, unsigned int line_number);
 	instruction_t oca[] = {
-		{"stack", stack}, {"queue", queue}, {"push", push},
+		{"stack", stackf}, {"queue", queue}, {"push", push},
 		{"pop", pop}, {"swap", swap}, {"rotl", rot_l},
 		{"rotr", rot_r}, {"pint", p_int}, {"pall", p_all},
 		{"pchr", p_char}, {"pstr", p_str}, {"add", add},
@@ -24,23 +24,28 @@ void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
 		{"nop", nop}, {NULL, NULL}
 	};
 
-	while (buffer[itr] != ' ' || buffer[itr] != '\n')
+	while (buffer[itr] != ' ' && buffer[itr] != '\n')
+	{
 		itr++;
+	}
 	oc = malloc((sizeof(char) * itr) + 1);
 	if (oc == NULL)
 		status = MALLOC_EXIT;
 	oc = strncpy(oc, buffer, itr);
+	printf("oc = %s\n", oc);
 	while (oca[idx].opcode)
 	{
-		if (strcmp(oca[idx].opcode, oc))
+		printf("oca = %s\n", oca[idx].opcode);
+		if (!strcmp(oca[idx].opcode, oc))
 		{
 			op_f = oca[idx].f;
+			printf("attempting match\n");
 			break;
 		}
 		idx++;
 	}
 	if (oca[idx].f == NULL)
-		op_f = oca[idx].f;
+		op_f = NULL;
 	free(oc);
 	return op_f;
 }
@@ -110,6 +115,8 @@ int check_int(char *buffer)
 
 void hand_exit(char *buffer, unsigned int line_number, FILE *fp)
 {
+	char *str = NULL;
+
 	/*Any error message must be printed on stderr*/
 	switch (status) {
 	case MALLOC_EXIT:

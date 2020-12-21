@@ -32,7 +32,7 @@ void p_all(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	stack_t *cursor = *stack;
 
 	if (cursor == NULL || stack == NULL)
-		status PINT_EXIT;
+		status = PINT_EXIT;
 
 	while (cursor != NULL)
 	{

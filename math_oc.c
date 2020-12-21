@@ -94,12 +94,12 @@ void divi(stack_t **stack, unsigned int line_number)
 		a = top->n;
 		top = top->next;
 		if (top->n == 0)
-		{
 			status = DIV_0_EXIT;
-			break;
+		else
+		{
+			top->n = top->n / a;
+			pop(stack, line_number);
 		}
-		top->n = top->n / a;
-		pop(stack, line_number);
 	}
 	else
 		status = DIV_EXIT;
