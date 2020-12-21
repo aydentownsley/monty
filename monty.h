@@ -66,34 +66,29 @@ typedef struct instruction_s
 
 /*____ GLOBAL VARIABLES ____*/
 
-extern unsigned int line_num;
-extern int stack_queue;
-extern char *buffer;
-extern unsigned int file_pos;
+extern FILE *fp;
 
 /*____ PROTOTYPES _____*/
 
-size_t get_size(FILE *fp);
-void open_and_read(char *file);
-int main(int argc, char *argv[]);
-void check_op(stack_t **stack);
+void (*check_op(stack_t **stack, unsigned int line_number, char *buffer))
+(stack_t **stack, unsigned int line_number);
 void null_comp(char *oc);
-int check_int(void);
-void hand_exit(int ex, char *str);
-void push(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void pop(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void swap(stack_t **stack, unsigned int line_numbe __attribute__((unused)));
-void rot_l(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void rot_r(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void p_int(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void p_all(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void p_char(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void p_str(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void add(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void sub(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void mul(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void divi(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void mod(stack_t **stack, unsigned int line_number __attribute__((unused)));
+int check_int(unsigned int line_number, char *buffer);
+void hand_exit(int ex, char *str, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void rot_l(stack_t **stack, unsigned int line_number);
+void rot_r(stack_t **stack, unsigned int line_number);
+void p_int(stack_t **stack, unsigned int line_number);
+void p_all(stack_t **stack, unsigned int line_number);
+void p_char(stack_t **stack, unsigned int line_number);
+void p_str(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_number);
+void divi(stack_t **stack, unsigned int line_number);
+void mod(stack_t **stack, unsigned int line_number);
 stack_t *add_begin(stack_t **stack, const int n);
 stack_t *add_end(stack_t **stack, const int n);
 void delete_begin(stack_t **stack);
