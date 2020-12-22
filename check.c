@@ -117,7 +117,7 @@ int check_int(char *buffer, stack_t **stack)
 void hand_exit(char *buffer, stack_t **stack, unsigned int line_number,
 FILE *fp)
 {
-	char *str;
+	char *str = NULL;
 
 	if (buffer)
 		str = find_str(buffer);

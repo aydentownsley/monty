@@ -36,9 +36,12 @@ int main(int argc, char *argv[])
 		main_help(buffer, &stack, line_number, fp);
 		line_number++;
 	}
-	free(buffer);
-	free_stack(stack);
-	fclose(fp);
+	if (buffer)
+		free(buffer);
+	if (stack)
+		free_stack(stack);
+	if (fp)
+		fclose(fp);
 	return (0);
 }
 
