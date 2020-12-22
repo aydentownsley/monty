@@ -39,7 +39,7 @@ void p_all(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	cursor = *stack;
 	while (cursor != NULL)
 	{
-		printf("%d\n", cursor->n);
+		fprintf(stdout, "%d\n", cursor->n);
 		cursor = cursor->next;
 	}
 }

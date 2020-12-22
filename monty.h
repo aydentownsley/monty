@@ -32,7 +32,7 @@
 
 /*____ GLOBAL VARIABLES ____*/
 
-int status;
+extern int status;
 
 /*____ STRUCTURES ____*/
 

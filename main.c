@@ -9,6 +9,8 @@
  * Return: 0 on success
  */
 
+int status = STACK;
+
 int main(int argc, char *argv[])
 {
 	size_t buff_size;
@@ -17,7 +19,6 @@ int main(int argc, char *argv[])
 	FILE *fp;
 	unsigned int i = 0, line_number = 1;
 	void (*f)(stack_t **stack, unsigned int line_number);
-	status = STACK;
 
 	if (argc != 2)
 		status = ARG_EXIT;
