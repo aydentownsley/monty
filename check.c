@@ -63,7 +63,7 @@ int check_int(char *buffer, stack_t **stack)
 	int num = 0;
 
 	while (!(isdigit(buffer[i])) && buffer[i] != '-' && buffer[i] != '\n')
-		i;
+		i++;
 	if (buffer[i] == '0')
 	{
 		if (status == STACK)
