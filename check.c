@@ -153,6 +153,23 @@ FILE *fp)
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 	else if (status == PCHAR_EXIT)
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
+	free_exit(buffer, stack, str, fp)
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * free_exit - frees stuff before exit
+ *
+ * @buffer: buffer holding commands
+ * @stack: head of stack/queue
+ * @str: string to free
+ * @fp: file pointer
+ *
+ * Return: none
+ */
+
+void free_exit(char *buffer, stack_t **stack, char *str, FILE *fp)
+{
 	if (fp)
 		fclose(fp);
 	if (stack && *stack)
@@ -161,7 +178,6 @@ FILE *fp)
 		free(str);
 	if (buffer)
 		free(buffer);
-	exit(EXIT_FAILURE);
 }
 
 /**

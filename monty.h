@@ -100,5 +100,6 @@ void queue(stack_t **stack, unsigned int line_number);
 char *find_str(char *buffer);
 void main_help(char *buffer, stack_t **stack,
 unsigned int line_number, FILE *fp);
+void free_exit(char *buffer, stack_t **stack, cahr *str, FILE *fp);
 
 #endif /* MONTY_H */
