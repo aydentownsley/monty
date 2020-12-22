@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stddef.h>
+#include <ctype.h>
 
 /*____ MACROS ____*/
 
