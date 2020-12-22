@@ -60,7 +60,7 @@ unsigned int line_number, FILE *fp)
 			continue;
 		}
 		else if (buffer[i] == '#' || buffer[i] == '\n')
-			break;
+		{break; }
 		else
 		{
 			f = check_op((buffer + i));
