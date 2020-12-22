@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		status = OPEN_EXIT;
 	buffer = malloc(sizeof(char));
 	if (buffer == NULL)
-			status = MALLOC_EXIT;
+		status = MALLOC_EXIT;
 	if (!stack)
 		stack = malloc(sizeof(stack_t *));
 	*stack = NULL;
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 			{
 				f = check_op((buffer + i));
 			}
-			if (f) /*need to check if its push so we call check int*/
+			if (f)
 			{
 				if (f == push)
 					check_int(buffer, stack);
@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
 		i = 0;
 	}
 	free(buffer);
+	free(stack);
 	fclose(fp);
 	return (0);
 }
