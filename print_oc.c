@@ -1,9 +1,10 @@
 #include "monty.h"
 
 /**
- * p_int -
+ * p_int - prints the int value from the front/top node
  *
- * @
+ * @stack: head of stack/queue
+ * @line_number: line of monty file
  *
  * Return:
  */
@@ -20,9 +21,10 @@ void p_int(stack_t **stack, unsigned int line_number __attribute__((unused)))
 }
 
 /**
- * p_all -
+ * p_all - prints all int values from the stack/queue
  *
- * @
+ * @stack: head of stack/queue
+ * @line_number: line of monty file
  *
  * Return:
  */

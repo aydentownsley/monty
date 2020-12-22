@@ -72,7 +72,6 @@ stack_t *add_end(stack_t **stack, const int n)
  * delete_begin - delete node at beginning of stack/queue
  *
  * @stack: head of list
- * @n: int in new node
  *
  * Return: int value of node
  * OR EXIT STATUS
@@ -98,14 +97,13 @@ stack_t *delete_begin(stack_t **stack)
 		free(*stack);
 		stack = NULL;
 	}
-	return *stack;
+	return (*stack);
 }
 
 /**
  * delete_end - delete node at end of stack/queue
  *
  * @stack: head of list
- * @n: int in new node
  *
  * Return: int value of node
  * OR EXIT STATUS
@@ -113,17 +111,17 @@ stack_t *delete_begin(stack_t **stack)
 
 void delete_end(stack_t **stack)
 {
-        stack_t *curr = *stack;
+	stack_t *curr = *stack;
 
-        if (!stack || !(*stack))
-                return;
+	if (!stack || !(*stack))
+		return;
 
 	while (curr->next != NULL)
 		curr = curr->next;
 
 	curr->prev->next = NULL;
 
-        free(curr);
+	free(curr);
 }
 
 /**

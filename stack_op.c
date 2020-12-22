@@ -5,6 +5,7 @@
  * with n (integer) stored in node
  *
  * @stack: head of stack/queue (list)
+ * @line_number: line number of monty file
  *
  * Return: void
  */
@@ -16,9 +17,10 @@ unsigned int line_number __attribute__((unused)))
 }
 
 /**
- * pop -
+ * pop - removes top/front of stack/queue
  *
- * @
+ * @stack: head of stack/queue
+ * @line_number: line number of monty file
  *
  * Return:
  */
@@ -35,6 +37,7 @@ void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * swap - swaps the top to elements of stack/queue
  *
  * @stack: head of stack/queue
+ * @line_number: line number of monty file
  *
  * Return: void, change stack
  */
@@ -59,6 +62,7 @@ void swap(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * rot_l - top element of stack/queue becomes last
  *
  * @stack: head of stack/queue
+ * @line_number: line number of monty file
  *
  * Return: void, mods stack/queue
  */
@@ -79,11 +83,12 @@ void rot_l(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * rot_r -
+ * rot_r - takes head and moves to tail
  *
- * @
+ * @stack: head of stack/queue
+ * @line_number: line number of monty file
  *
- * Return:
+ * Return: void, change stack
  */
 
 void rot_r(stack_t **stack, unsigned int line_number __attribute__((unused)))

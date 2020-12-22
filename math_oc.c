@@ -76,7 +76,8 @@ void mul(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * divi - sets the second from top element of stack to top / second and pops top
+ * divi - sets the second from top element of
+ * stack to top / second and pops top
  *
  * @stack: the stack opperated on
  * @line_number: unused line_number attribute

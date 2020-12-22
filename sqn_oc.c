@@ -1,7 +1,7 @@
 #include "monty.h"
-/* prototypes not added yet */
+
 /**
- * nop -
+ * nop - do nothing
  *
  * @stack: the pointer to the head of the stack;
  * @line_number: current line number
@@ -9,13 +9,14 @@
  * Return: void
  */
 
-void nop(stack_t **stack __attribute__ ((unused)), unsigned int line_number __attribute__ ((unused)))
+void nop(stack_t **stack __attribute__ ((unused)),
+unsigned int line_number __attribute__ ((unused)))
 {
 	return;
 }
 
 /**
- * stack -
+ * stackf - handle list as stack
  *
  * @stack: the pointer to the head of the stack;
  * @line_number: current line number
@@ -30,7 +31,7 @@ unsigned int line_number __attribute__ ((unused)))
 }
 
 /**
- * queue -
+ * queue - handle list as queue
  *
  * @stack: the pointer to the head of the stack;
  * @line_number: current line number

@@ -9,12 +9,11 @@
  * ''needed to advance buffer correctly
  */
 
-void (*check_op(char *buffer))
-(stack_t **stack, unsigned int line_number)
+void (*check_op(char *buffer))(stack_t **stack, unsigned int line_number)
 {
 	int itr = 0, idx = 0;
 	char *oc;
-	void (*op_f) (stack_t **stack, unsigned int line_number);
+	void (*op_f)(stack_t **stack, unsigned int line_number);
 	instruction_t oca[] = {
 		{"stack", stackf}, {"queue", queue}, {"push", push},
 		{"pop", pop}, {"swap", swap}, {"rotl", rot_l},
@@ -44,13 +43,13 @@ void (*check_op(char *buffer))
 	if (oca[idx].f == NULL)
 		op_f = NULL;
 	free(oc);
-	return op_f;
+	return (op_f);
 }
 
 /**
  * check_int - checks for a number represended by a string after a " "
  *
- * @line_number: the current line number
+ * @stack: head of stack/queue
  * @buffer: string of text on current line
  *
  * Return: int containted in string
@@ -62,21 +61,21 @@ int check_int(char *buffer, stack_t **stack)
 	char *number;
 	int num = 0;
 
-	while (!(buffer[itr] >= '0' && buffer[itr] <= '9') &&
-buffer[itr] != '-' && buffer[itr] != '\n')
+	while (!(buffer[itr] >= '0' && buffer[itr] <= '9')
+		&& buffer[itr] != '-' && buffer[itr] != '\n')
 			itr++;
-	if(buffer[itr] == '0')
+	if (buffer[itr] == '0')
 	{
 		if (status == STACK)
 			add_begin(stack, num);
 		else if (status == QUEUE)
 			add_end(stack, num);
-		return(0);
+		return (0);
 	}
 	else
 	{
 		while ((buffer[itr + se] >= '0' && buffer[itr + se] <= '9')
-|| buffer[itr + se] == '-')
+				|| buffer[itr + se] == '-')
 		      se++;
 		number = malloc((sizeof(char) * se) + 1);
 		if (number == NULL)
@@ -95,7 +94,7 @@ buffer[itr] != '-' && buffer[itr] != '\n')
 		}
 		else if (status == QUEUE)
 			add_end(stack, num);
-		return(0);
+		return (0);
 	}
 	status = OP_EXIT;
 	return (-1);
@@ -104,20 +103,20 @@ buffer[itr] != '-' && buffer[itr] != '\n')
 /**
  * hand_exit - takes a exit macro and string then prints message and exits
  *
- * @ex: exit macro to decide message
- * @str: string that caused the error
- * @line_number:
+ * @buffer: buffer holding commands
+ * @stack: head of stack/queue
+ * @line_number: line of monty file
+ * @fp: file pointer
  *
  * Return: none
  */
 
-void hand_exit(char *buffer, stack_t **stack,
-unsigned int line_number, FILE *fp)
+void hand_exit(char *buffer, stack_t **stack, unsigned int line_number,
+FILE *fp)
 {
 	char *str = NULL;
 
 	str = find_str(buffer);
-	/*Any error message must be printed on stderr*/
 	if (status == MALLOC_EXIT)
 		printf("Error: malloc failed\n");
 	else if (status == OP_EXIT)
@@ -145,7 +144,7 @@ unsigned int line_number, FILE *fp)
 	else if (status == DIV_0_EXIT)
 		printf("L%u: division by zero\n", line_number);
 	else if (status == MOD_EXIT)
-       		printf("L%u: can't mod, stack too short\n", line_number);
+		printf("L%u: can't mod, stack too short\n", line_number);
 	else if (status == IN_PCHAR_EXIT)
 		printf("L%u: can't pchar, value out of range\n", line_number);
 	else if (status == PCHAR_EXIT)
@@ -154,9 +153,16 @@ unsigned int line_number, FILE *fp)
 	free_stack(*stack);
 	free(str);
 	free(buffer);
- 	exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
+/**
+ * find_str - find string in buffer
+ *
+ * @buffer: buffer holding commands
+ *
+ * Return: return string
+ */
 
 char *find_str(char *buffer)
 {
@@ -174,5 +180,4 @@ char *find_str(char *buffer)
 		status = MALLOC_EXIT;
 	str = strncpy(str, buffer, (j));
 	return (str);
-
 }

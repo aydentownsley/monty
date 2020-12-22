@@ -4,6 +4,7 @@
  * p_char - print char at top of stack/queue
  *
  * @stack: head of stack/queue
+ * @line_number: current line number of monty file
  *
  * Return: void, prints character
  */
@@ -30,6 +31,7 @@ void p_char(stack_t **stack, unsigned int line_number __attribute__((unused)))
  * p_str - prints a string from the top of the stack
  *
  * @stack: head of the stack/queue
+ * @line_number: current line number of monty file
  *
  * Return: void, prints string
  */
