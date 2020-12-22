@@ -95,7 +95,7 @@ stack_t *delete_begin(stack_t **stack)
 	else
 	{
 		free(*stack);
-		stack = NULL;
+		*stack = NULL;
 	}
 	return (*stack);
 }

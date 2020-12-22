@@ -69,7 +69,7 @@ unsigned int line_number, FILE *fp)
 		{
 			if (f == push)
 			{
-				if (check_int(buffer, stack) == -1)
+				if (check_int((buffer + i), stack) == -1)
 					hand_exit(buffer, stack,
 line_number, fp);
 			}
