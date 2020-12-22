@@ -78,13 +78,14 @@ int check_int(char *buffer, stack_t **stack)
 		while ((buffer[itr + se] >= '0' && buffer[itr + se] <= '9')
 				|| buffer[itr + se] == '-')
 		      se++;
-		number = malloc((sizeof(char) * se) + 1);
+		number = malloc((sizeof(char) * se) + 2);
 		if (number == NULL)
 		{
 			status = MALLOC_EXIT;
 			return (-1);
 		}
-		strncpy(number, (buffer + itr), se + 2);
+		strncpy(number, (buffer + itr), se + 1);
+		number[se + 1] = '\0';
 		num = atoi(number);
 		if (num == 0)
 			return (-1);

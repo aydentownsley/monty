@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
 		status = OPEN_EXIT;
 		hand_exit(buffer, &stack, line_number, fp);
 	}
-/*	buffer = malloc(sizeof(char)); getline mallocs for us */
+/*	buffer = malloc(sizeof(char)); getline mallocs for us
 	if (buffer == NULL)
 	{
 		hand_exit(buffer, &stack, line_number, fp);
 		status = MALLOC_EXIT;
-	}
+	}  if we dont malloc this always comes true consider deleting */
 	while (0 < getline(&buffer, &buff_size, fp))
 	{
 		while (buffer[i])
