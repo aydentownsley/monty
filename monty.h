@@ -73,7 +73,8 @@ typedef struct instruction_s
 void (*check_op(char *buffer))
 (stack_t **stack, unsigned int line_number);
 int check_int(char *buffer, stack_t **stack);
-void hand_exit(char *buffer, unsigned int line_number, FILE *fp);
+void hand_exit(char *buffer, stack_t **stack,
+unsigned int line_number, FILE *fp);
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
@@ -92,9 +93,10 @@ stack_t *add_begin(stack_t **stack, const int n);
 stack_t *add_end(stack_t **stack, const int n);
 void delete_begin(stack_t **stack);
 void delete_end(stack_t **stack);
-void free_stack(stack_t *stack);
+void free_stack(stack_t **stack);
 void nop(stack_t **stack, unsigned int line_number);
 void stackf(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
+char *find_str(char *buffer);
 
 #endif /* MONTY_H */

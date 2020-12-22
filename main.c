@@ -25,12 +25,17 @@ int main(int argc, char *argv[])
 
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
+	{
 		status = OPEN_EXIT;
+		hand_exit(buffer, stack, line_number, fp);
+	}
 	buffer = malloc(sizeof(char));
 	if (buffer == NULL)
+	{
+		hand_exit(buffer, stack, line_number, fp);
 		status = MALLOC_EXIT;
-	if (!stack)
-		stack = malloc(sizeof(stack_t *));
+	}
+	stack = malloc(sizeof(stack_t *));
 	*stack = NULL;
 	while (0 < getline(&buffer, &buff_size, fp))
 	{
@@ -54,14 +59,14 @@ int main(int argc, char *argv[])
 				else
 					f(stack, line_number);
 				if (status < 16)
-				{
-					hand_exit(buffer, line_number, fp);
-				}
+					hand_exit(buffer, stack,
+line_number, fp);
 				break;
 			}
 			else
 			{
-				/*error invalid op code*/
+				status = OP_EXIT;
+				hand_exit(buffer, stack, line_number, fp);
 				break;
 			}
 		}
@@ -69,7 +74,7 @@ int main(int argc, char *argv[])
 		i = 0;
 	}
 	free(buffer);
-	free(stack);
+	free_stack(stack);
 	fclose(fp);
 	return (0);
 }

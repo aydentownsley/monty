@@ -111,46 +111,68 @@ buffer[itr] != '-' && buffer[itr] != '\n')
  * Return: none
  */
 
-void hand_exit(char *buffer, unsigned int line_number, FILE *fp)
+void hand_exit(char *buffer, stack_t **stack,
+unsigned int line_number, FILE *fp)
 {
 	char *str = NULL;
 
+	str = find_str(buffer);
 	/*Any error message must be printed on stderr*/
-	switch (status) {
-	case MALLOC_EXIT:
+	if (status = MALLOC_EXIT)
 		printf("Error: malloc failed\n");
-	case OP_EXIT:
+	else if (status = OP_EXIT)
 		printf("L%u: unknown instruction %s", line_number, str);
-	case OPEN_EXIT:
+	else if (status = OPEN_EXIT)
 		printf("Error: Can't open file %s\n", str);
-	case ARG_EXIT:
+	else if (status = ARG_EXIT)
 		printf("USAGE: monty file\n");
-	case PUSH_INT_EXIT:
+	else if (status =  PUSH_INT_EXIT)
 		printf("L%u: usage: push integer\n", line_number);
-	case PINT_EXIT:
+	else if (status = PINT_EXIT)
 		printf("L%u: can't pint, stack empty\n", line_number);
-	case POP_EXIT:
+	else if (status = POP_EXIT)
 		printf("L%u: can't pop an empty stack\n", line_number);
-	case SWAP_EXIT:
+	else if (status = SWAP_EXIT)
 		printf("L%u: can't swap, stack too short\n", line_number);
-	case ADD_EXIT:
+	else if (status = ADD_EXIT)
 		printf("L%u: can't add, stack too short\n", line_number);
-	case SUB_EXIT:
+	else if (status = SUB_EXIT)
 		printf("L%u: can't sub, stack too short\n", line_number);
-	case MUL_EXIT:
+	else if (status = MUL_EXIT)
 		printf("L%u: can't mul, stack too short\n", line_number);
-	case DIV_EXIT:
+	else if (status = DIV_EXIT)
 		printf("L%u: can't div, stack too short\n", line_number);
-	case DIV_0_EXIT:
+	else if (status = DIV_0_EXIT)
 		printf("L%u: division by zero\n", line_number);
-	case MOD_EXIT:
+	else if (status = MOD_EXIT)
        		printf("L%u: can't mod, stack too short\n", line_number);
-	case IN_PCHAR_EXIT:
+	else if (status = IN_PCHAR_EXIT)
 		printf("L%u: can't pchar, value out of range\n", line_number);
-	case PCHAR_EXIT:
+	else if (status = PCHAR_EXIT)
 		printf("L%u: can't pchar, stack empty\n", line_number);
-	}
-	free(fp);
+	fclose(fp);
+	free_stack(stack);
+	free(str);
 	free(buffer);
  	exit(EXIT_FAILURE);
+}
+
+
+char *find_str(char *buffer)
+{
+	int i = 0, j = 0;
+	char *str;
+
+	while (buffer[i] == ' ')
+	{
+		i++;
+	}
+	while (buffer[i + j] != ' ' && buffer[i + j] != '\n')
+		j++;
+	str = malloc(sizeof(char) * ((j) + 1));
+	if (str == NULL)
+		status = MALLOC_EXIT;
+	str = strncpy(str, buffer, (j));
+	return (str);
+
 }

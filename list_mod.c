@@ -124,14 +124,21 @@ void delete_end(stack_t **stack)
  * Return: VOID
  */
 
-void free_stack(stack_t *stack)
+void free_stack(stack_t **stack)
 {
 	stack_t *new;
 
-	while (stack)
+	while (*stack)
 	{
-		new = stack->next;
-		free(stack);
-		stack = new;
+		if (*stack->next != NULL)
+		{
+			new = *stack->next;
+			free(*stack);
+			*stack = new;
+		}
+		else
+			free(*stack);
+
 	}
+	free(stack);
 }
