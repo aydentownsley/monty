@@ -13,15 +13,18 @@ int status = STACK;
 
 int main(int argc, char *argv[])
 {
-	size_t buff_size;
+	size_t buff_size = 0;
 	char *buffer = NULL;
 	stack_t *stack = NULL;
-	FILE *fp;
+	FILE *fp = NULL;
 	unsigned int i = 0, line_number = 1;
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 	if (argc != 2)
+	{
 		status = ARG_EXIT;
+		hand_exit(buffer, &stack, 0, fp);
+	}
 
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
@@ -29,7 +32,7 @@ int main(int argc, char *argv[])
 		status = OPEN_EXIT;
 		hand_exit(buffer, &stack, line_number, fp);
 	}
-	buffer = malloc(sizeof(char));
+/*	buffer = malloc(sizeof(char)); getline mallocs for us */
 	if (buffer == NULL)
 	{
 		hand_exit(buffer, &stack, line_number, fp);

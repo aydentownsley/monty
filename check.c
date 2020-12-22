@@ -31,6 +31,7 @@ void (*check_op(char *buffer))(stack_t **stack, unsigned int line_number)
 	if (oc == NULL)
 		status = MALLOC_EXIT;
 	oc = strncpy(oc, buffer, itr);
+	oc[itr] = '\0';
 	while (oca[idx].opcode)
 	{
 		if (!strcmp(oca[idx].opcode, oc))
@@ -116,7 +117,8 @@ FILE *fp)
 {
 	char *str = NULL;
 
-	str = find_str(buffer);
+	if (buffer)
+		str = find_str(buffer);
 	if (status == MALLOC_EXIT)
 		printf("Error: malloc failed\n");
 	else if (status == OP_EXIT)
@@ -149,10 +151,14 @@ FILE *fp)
 		printf("L%u: can't pchar, value out of range\n", line_number);
 	else if (status == PCHAR_EXIT)
 		printf("L%u: can't pchar, stack empty\n", line_number);
-	fclose(fp);
-	free_stack(*stack);
-	free(str);
-	free(buffer);
+	if (fp)
+		fclose(fp);
+	if (stack)
+		free_stack(*stack);
+	if (str)
+		free(str);
+	if (buffer)
+		free(buffer);
 	exit(EXIT_FAILURE);
 }
 

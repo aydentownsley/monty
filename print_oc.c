@@ -35,7 +35,6 @@ void p_all(stack_t **stack, unsigned int line_number __attribute__((unused)))
 
 	if (*stack == NULL || stack == NULL)
 	{
-		status = PINT_EXIT;
 		return;
 	}
 	cursor = *stack;
