@@ -27,10 +27,16 @@ unsigned int line_number __attribute__((unused)))
 
 void pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
-	if (stack && *stack)
+	if (*stack)
+	{
+		printf("running here\n");
 		*stack = delete_begin(stack);
+	}
 	else
+	{
 		status = POP_EXIT;
+		printf("detecting empty stack\n");
+	}
 }
 
 /**

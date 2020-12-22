@@ -56,12 +56,18 @@ int main(int argc, char *argv[])
 			if (f)
 			{
 				if (f == push)
-					check_int(buffer, &stack);
+				{
+					if(-1 == check_int(buffer, &stack))
+						hand_exit(buffer, &stack,
+line_number, fp);
+				}
 				else
 					f(&stack, line_number);
 				if (status < 16)
+				{
 					hand_exit(buffer, &stack,
 line_number, fp);
+				}
 				break;
 			}
 			else

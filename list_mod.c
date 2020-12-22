@@ -81,7 +81,7 @@ stack_t *delete_begin(stack_t **stack)
 {
 	stack_t *curr;
 
-	if (!stack || !(*stack))
+	if (!(*stack))
 	{
 		status = POP_EXIT;
 	}

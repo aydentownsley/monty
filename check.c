@@ -88,7 +88,10 @@ int check_int(char *buffer, stack_t **stack)
 		number[se + 1] = '\0';
 		num = atoi(number);
 		if (num == 0)
+		{
+			status = PUSH_INT_EXIT;
 			return (-1);
+		}
 		free(number);
 		if (status == STACK)
 		{
@@ -116,42 +119,41 @@ int check_int(char *buffer, stack_t **stack)
 void hand_exit(char *buffer, stack_t **stack, unsigned int line_number,
 FILE *fp)
 {
-	char *str = NULL;
-
+	char *str;
 	if (buffer)
 		str = find_str(buffer);
 	if (status == MALLOC_EXIT)
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 	else if (status == OP_EXIT)
-		printf("L%u: unknown instruction %s\n", line_number, str);
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, str);
 	else if (status == OPEN_EXIT)
-		printf("Error: Can't open file %s\n", str);
+		fprintf(stderr, "Error: Can't open file %s\n", str);
 	else if (status == ARG_EXIT)
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 	else if (status ==  PUSH_INT_EXIT)
-		printf("L%u: usage: push integer\n", line_number);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 	else if (status == PINT_EXIT)
-		printf("L%u: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 	else if (status == POP_EXIT)
-		printf("L%u: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 	else if (status == SWAP_EXIT)
-		printf("L%u: can't swap, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
 	else if (status == ADD_EXIT)
-		printf("L%u: can't add, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
 	else if (status == SUB_EXIT)
-		printf("L%u: can't sub, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
 	else if (status == MUL_EXIT)
-		printf("L%u: can't mul, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
 	else if (status == DIV_EXIT)
-		printf("L%u: can't div, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
 	else if (status == DIV_0_EXIT)
-		printf("L%u: division by zero\n", line_number);
+		fprintf(stderr, "L%u: division by zero\n", line_number);
 	else if (status == MOD_EXIT)
-		printf("L%u: can't mod, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
 	else if (status == IN_PCHAR_EXIT)
-		printf("L%u: can't pchar, value out of range\n", line_number);
+		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 	else if (status == PCHAR_EXIT)
-		printf("L%u: can't pchar, stack empty\n", line_number);
+		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
 	if (fp)
 		fclose(fp);
 	if (stack)
