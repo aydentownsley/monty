@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
 	size_t buff_size;
 	char *buffer = NULL;
-	stack_t **stack = NULL;
+	stack_t *stack = NULL;
 	FILE *fp;
 	unsigned int i = 0, line_number = 1;
 	void (*f)(stack_t **stack, unsigned int line_number);
@@ -27,16 +27,14 @@ int main(int argc, char *argv[])
 	if (fp == NULL)
 	{
 		status = OPEN_EXIT;
-		hand_exit(buffer, stack, line_number, fp);
+		hand_exit(buffer, &stack, line_number, fp);
 	}
 	buffer = malloc(sizeof(char));
 	if (buffer == NULL)
 	{
-		hand_exit(buffer, stack, line_number, fp);
+		hand_exit(buffer, &stack, line_number, fp);
 		status = MALLOC_EXIT;
 	}
-	stack = malloc(sizeof(stack_t *));
-	*stack = NULL;
 	while (0 < getline(&buffer, &buff_size, fp))
 	{
 		while (buffer[i])
@@ -55,18 +53,18 @@ int main(int argc, char *argv[])
 			if (f)
 			{
 				if (f == push)
-					check_int(buffer, stack);
+					check_int(buffer, &stack);
 				else
-					f(stack, line_number);
+					f(&stack, line_number);
 				if (status < 16)
-					hand_exit(buffer, stack,
+					hand_exit(buffer, &stack,
 line_number, fp);
 				break;
 			}
 			else
 			{
 				status = OP_EXIT;
-				hand_exit(buffer, stack, line_number, fp);
+				hand_exit(buffer, &stack, line_number, fp);
 				break;
 			}
 		}

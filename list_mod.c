@@ -78,17 +78,27 @@ stack_t *add_end(stack_t **stack, const int n)
  * OR EXIT STATUS
  */
 
-void delete_begin(stack_t **stack)
+stack_t *delete_begin(stack_t **stack)
 {
-	stack_t *curr = *stack;
+	stack_t *curr;
 
-	if (!stack|| !(*stack))
+	if (!stack || !(*stack))
+	{
 		status = POP_EXIT;
-
-	*stack = curr->next;
-	curr->next->prev = NULL;
-
-	free(curr);
+	}
+	else if ((*stack)->next)
+	{
+		curr = *stack;
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(curr);
+	}
+	else
+	{
+		free(*stack);
+		stack = NULL;
+	}
+	return *stack;
 }
 
 /**
@@ -124,21 +134,15 @@ void delete_end(stack_t **stack)
  * Return: VOID
  */
 
-void free_stack(stack_t **stack)
+void free_stack(stack_t *stack)
 {
 	stack_t *new;
 
-	while (*stack)
+	while (stack)
 	{
-		if (*stack->next != NULL)
-		{
-			new = *stack->next;
-			free(*stack);
-			*stack = new;
-		}
-		else
-			free(*stack);
-
+		new = stack->next;
+		free(stack);
+		stack = new;
 	}
-	free(stack);
+
 }

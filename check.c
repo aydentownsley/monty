@@ -118,40 +118,40 @@ unsigned int line_number, FILE *fp)
 
 	str = find_str(buffer);
 	/*Any error message must be printed on stderr*/
-	if (status = MALLOC_EXIT)
+	if (status == MALLOC_EXIT)
 		printf("Error: malloc failed\n");
-	else if (status = OP_EXIT)
-		printf("L%u: unknown instruction %s", line_number, str);
-	else if (status = OPEN_EXIT)
+	else if (status == OP_EXIT)
+		printf("L%u: unknown instruction %s\n", line_number, str);
+	else if (status == OPEN_EXIT)
 		printf("Error: Can't open file %s\n", str);
-	else if (status = ARG_EXIT)
+	else if (status == ARG_EXIT)
 		printf("USAGE: monty file\n");
-	else if (status =  PUSH_INT_EXIT)
+	else if (status ==  PUSH_INT_EXIT)
 		printf("L%u: usage: push integer\n", line_number);
-	else if (status = PINT_EXIT)
+	else if (status == PINT_EXIT)
 		printf("L%u: can't pint, stack empty\n", line_number);
-	else if (status = POP_EXIT)
+	else if (status == POP_EXIT)
 		printf("L%u: can't pop an empty stack\n", line_number);
-	else if (status = SWAP_EXIT)
+	else if (status == SWAP_EXIT)
 		printf("L%u: can't swap, stack too short\n", line_number);
-	else if (status = ADD_EXIT)
+	else if (status == ADD_EXIT)
 		printf("L%u: can't add, stack too short\n", line_number);
-	else if (status = SUB_EXIT)
+	else if (status == SUB_EXIT)
 		printf("L%u: can't sub, stack too short\n", line_number);
-	else if (status = MUL_EXIT)
+	else if (status == MUL_EXIT)
 		printf("L%u: can't mul, stack too short\n", line_number);
-	else if (status = DIV_EXIT)
+	else if (status == DIV_EXIT)
 		printf("L%u: can't div, stack too short\n", line_number);
-	else if (status = DIV_0_EXIT)
+	else if (status == DIV_0_EXIT)
 		printf("L%u: division by zero\n", line_number);
-	else if (status = MOD_EXIT)
+	else if (status == MOD_EXIT)
        		printf("L%u: can't mod, stack too short\n", line_number);
-	else if (status = IN_PCHAR_EXIT)
+	else if (status == IN_PCHAR_EXIT)
 		printf("L%u: can't pchar, value out of range\n", line_number);
-	else if (status = PCHAR_EXIT)
+	else if (status == PCHAR_EXIT)
 		printf("L%u: can't pchar, stack empty\n", line_number);
 	fclose(fp);
-	free_stack(stack);
+	free_stack(*stack);
 	free(str);
 	free(buffer);
  	exit(EXIT_FAILURE);
