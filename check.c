@@ -155,7 +155,7 @@ FILE *fp)
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
 	if (fp)
 		fclose(fp);
-	if (stack)
+	if (stack && *stack)
 		free_stack(*stack);
 	if (str)
 		free(str);

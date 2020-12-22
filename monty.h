@@ -98,5 +98,7 @@ void nop(stack_t **stack, unsigned int line_number);
 void stackf(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
 char *find_str(char *buffer);
+void main_help(char *buffer, stack_t **stack,
+unsigned int line_number, FILE *fp);
 
 #endif /* MONTY_H */
