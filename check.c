@@ -58,14 +58,13 @@ void (*check_op(char *buffer))(stack_t **stack, unsigned int line_number)
 
 int check_int(char *buffer, stack_t **stack)
 {
-	unsigned int itr = 0, se = 0; /*se == end of string */
+	unsigned int i = 0, se = 0; /*se == end of string */
 	char *number;
 	int num = 0;
 
-	while (!(buffer[itr] >= '0' && buffer[itr] <= '9')
-		&& buffer[itr] != '-' && buffer[itr] != '\n')
-			itr++;
-	if (buffer[itr] == '0')
+	while (!(isdigit(buffer[i])) && buffer[i] != '-' && buffer[i] != '\n')
+		i;
+	if (buffer[i] == '0')
 	{
 		if (status == STACK)
 			add_begin(stack, num);
@@ -75,16 +74,15 @@ int check_int(char *buffer, stack_t **stack)
 	}
 	else
 	{
-		while ((buffer[itr + se] >= '0' && buffer[itr + se] <= '9')
-				|| buffer[itr + se] == '-')
-		      se++;
+		while (isdigit(buffer[i + se]) || buffer[i + se] == '-')
+			se++;
 		number = malloc((sizeof(char) * se) + 2);
 		if (number == NULL)
 		{
 			status = MALLOC_EXIT;
 			return (-1);
 		}
-		strncpy(number, (buffer + itr), se + 1);
+		strncpy(number, (buffer + i), se + 1);
 		number[se + 1] = '\0';
 		num = atoi(number);
 		if (num == 0)
@@ -120,6 +118,7 @@ void hand_exit(char *buffer, stack_t **stack, unsigned int line_number,
 FILE *fp)
 {
 	char *str;
+
 	if (buffer)
 		str = find_str(buffer);
 	if (status == MALLOC_EXIT)
