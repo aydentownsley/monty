@@ -21,10 +21,7 @@ int main(int argc, char *argv[])
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 	if (argc != 2)
-	{
 		status = ARG_EXIT;
-		hand_exit()
-	}
 
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)
