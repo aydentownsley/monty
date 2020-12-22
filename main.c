@@ -20,7 +20,10 @@ int main(int argc, char *argv[])
 	status = STACK;
 
 	if (argc != 2)
+	{
 		status = ARG_EXIT;
+		hand_exit()
+	}
 
 	fp = fopen(argv[1], "r");
 	if (fp == NULL)

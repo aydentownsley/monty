@@ -71,16 +71,16 @@ buffer[itr] != '-' && buffer[itr] != '\n')
 			add_begin(stack, num);
 		else if (status == QUEUE)
 			add_end(stack, num);
+		return(0);
 	}
 	else
 	{
-		while ((buffer[itr + se] >= 48 && buffer[itr + se] >= 57)
+		while ((buffer[itr + se] >= '0' && buffer[itr + se] <= '9')
 || buffer[itr + se] == '-')
 		      se++;
-		number = malloc((sizeof(char) * se) + 2);
+		number = malloc((sizeof(char) * se) + 1);
 		if (number == NULL)
 		{
-			free(number);
 			status = MALLOC_EXIT;
 			return (-1);
 		}
