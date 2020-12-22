@@ -62,9 +62,12 @@ int check_int(char *buffer, stack_t **stack)
 	char *number;
 	int num = 0;
 
-	while (!(isdigit(buffer[i])) && buffer[i] != '-' && buffer[i] != '\n')
+	while (buffer[i] != ' ' && buffer[i] != '\n')
 		i++;
-	if (buffer[i] == '0')
+	i++;
+	while (buffer[i] == ' ' && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '0' && (buffer[i + 1] == ' ' || buffer[i + 1] == '\n'))
 	{
 		if (status == STACK)
 			add_begin(stack, num);
@@ -74,7 +77,7 @@ int check_int(char *buffer, stack_t **stack)
 	}
 	else
 	{
-		while (isdigit(buffer[i + se]) || buffer[i + se] == '-')
+		while (buffer[i + se] != ' ' && buffer[i + se] != '\n')
 			se++;
 		number = malloc((sizeof(char) * se) + 2);
 		if (number == NULL)
