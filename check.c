@@ -153,7 +153,7 @@ FILE *fp)
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 	else if (status == PCHAR_EXIT)
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
-	free_exit(buffer, stack, str, fp)
+	free_exit(buffer, stack, str, fp);
 	exit(EXIT_FAILURE);
 }
 
