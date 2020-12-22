@@ -24,7 +24,10 @@ void p_char(stack_t **stack, unsigned int line_number __attribute__((unused)))
 		else
 			status = IN_PCHAR_EXIT;
 	}
-/*	hand_exit(PCHAR_EXIT, NULL, line_number); */
+	else
+	{
+		status = PCHAR_EXIT;
+	}
 }
 
 /**
