@@ -13,7 +13,7 @@ void p_char(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 	stack_t *tmp;
 
-	if (stack && *stack)
+	if (*stack)
 	{
 		tmp = *stack;
 		if (tmp->n > 0 && tmp->n <= 127)
