@@ -16,7 +16,7 @@ void p_char(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	if (*stack)
 	{
 		tmp = *stack;
-		if (tmp->n > 0 && tmp->n <= 127)
+		if (tmp->n => 0 && tmp->n <= 127)
 		{
 			putchar(tmp->n);
 			putchar('\n');
